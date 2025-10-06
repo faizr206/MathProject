@@ -1,0 +1,5 @@
+classes,r_class,s_clip,metric,robust,overall_accuracy,macro_accuracy,n_test_clips
+"['V6', 'V8', 'inline-4', 'inline-6', 'single-cylinder']",5,2,sumcos2,False,0.1590909090909091,0.15555555555555553,88
+"['V6', 'V8', 'inline-4', 'inline-6', 'single-cylinder']",5,2,minangle,False,0.23863636363636365,0.2333333333333333,88
+"['V6', 'V8', 'inline-4', 'inline-6', 'single-cylinder']",5,3,sumcos2,False,0.2727272727272727,0.2666666666666667,88
+"['V6', 'V8', 'inline-4', 'inline-6', 'single-cylinder']",5,3,minangle,False,0.2159090909090909,0.2125,88

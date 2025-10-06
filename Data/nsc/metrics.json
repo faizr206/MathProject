@@ -1,0 +1,35 @@
+{
+  "classes": [
+    "V6",
+    "V8",
+    "inline-4",
+    "inline-6",
+    "single-cylinder"
+  ],
+  "chance_baseline": 0.2,
+  "overall_accuracy": 0.2727272727272727,
+  "macro_accuracy": 0.2666666666666667,
+  "n_test_clips_total": 88,
+  "train_clip_counts": {
+    "V6": 38,
+    "V8": 42,
+    "inline-4": 42,
+    "inline-6": 42,
+    "single-cylinder": 41
+  },
+  "test_clip_counts": {
+    "V6": 16,
+    "V8": 18,
+    "inline-4": 18,
+    "inline-6": 18,
+    "single-cylinder": 18
+  },
+  "pca_ranks": {
+    "V6": 3,
+    "V8": 3,
+    "inline-4": 4,
+    "inline-6": 3,
+    "single-cylinder": 4
+  },
+  "aggregator": "median"
+}

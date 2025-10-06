@@ -1,0 +1,24 @@
+{
+  "q": 0.35,
+  "min_k": 10,
+  "uniform_rank": 4,
+  "robust": false,
+  "classes": [
+    "V6",
+    "V8",
+    "inline-4",
+    "inline-6",
+    "single-cylinder"
+  ],
+  "pca_ranks": {
+    "V6": 4,
+    "V8": 4,
+    "inline-4": 4,
+    "inline-6": 4,
+    "single-cylinder": 4
+  },
+  "overall_acc_cal": 0.2727272727272727,
+  "macro_acc_cal": 0.26805555555555555,
+  "overall_acc_raw": 0.2159090909090909,
+  "macro_acc_raw": 0.2125
+}

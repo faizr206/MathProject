@@ -1,0 +1,45 @@
+== Global PCA ==
+Kept d_glob=16 (≥95% var, cap 150)
+
+== Outlier trimming ==
+Trimmed 91 (10% per class)
+
+== Shared dimension & rule (CV) ==
+SHARED_D=10, BEST_RULE=residual_normed
+Grid search: cv_shared_d_rule_grid_affine.csv
+
+== Mean distances between classes (affine offsets) ==
+{'c1': 'no', 'c2': 'no', 'mean_distance': 0.0}
+{'c1': 'no', 'c2': 'yes', 'mean_distance': 1.742177620969234}
+{'c1': 'yes', 'c2': 'no', 'mean_distance': 1.742177620969234}
+{'c1': 'yes', 'c2': 'yes', 'mean_distance': 0.0}
+
+== Final evaluation on full set ==
+Majority baseline acc: 0.528 (majority='yes')
+{
+  "no": {
+    "precision": 0.5491452991452992,
+    "recall": 0.5962877030162413,
+    "f1-score": 0.5717463848720801,
+    "support": 431.0
+  },
+  "yes": {
+    "precision": 0.6098654708520179,
+    "recall": 0.5631469979296067,
+    "f1-score": 0.5855758880516685,
+    "support": 483.0
+  },
+  "accuracy": 0.5787746170678337,
+  "macro avg": {
+    "precision": 0.5795053849986586,
+    "recall": 0.579717350472924,
+    "f1-score": 0.5786611364618743,
+    "support": 914.0
+  },
+  "weighted avg": {
+    "precision": 0.5812326546533355,
+    "recall": 0.5787746170678337,
+    "f1-score": 0.579054535895867,
+    "support": 914.0
+  }
+}

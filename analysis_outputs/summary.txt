@@ -1,0 +1,10 @@
+== Intrinsic dimensions (per class) ==
+no: d=95
+yes: d=105
+
+== NSC CV classification report ==
+no: {'precision': 0.448, 'recall': 0.12993039443155452, 'f1-score': 0.2014388489208633, 'support': 431.0}
+yes: {'precision': 0.5247148288973384, 'recall': 0.8571428571428571, 'f1-score': 0.6509433962264151, 'support': 483.0}
+accuracy: 0.5142231947483589
+macro avg: {'precision': 0.4863574144486692, 'recall': 0.4935366257872058, 'f1-score': 0.42619112257363917, 'support': 914.0}
+weighted avg: {'precision': 0.48853967435165696, 'recall': 0.5142231947483589, 'f1-score': 0.43897790400683867, 'support': 914.0}

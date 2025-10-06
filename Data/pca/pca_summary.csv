@@ -1,0 +1,6 @@
+engine_configuration,status,N_frames,D_features,rank,cum_evr_at_20,pca_npz,scree_png
+V6,ok,1900,60,5,0.9987139701843262,pca/V6_pca.npz,pca/scree_V6.png
+V8,ok,2100,60,6,0.9982619881629944,pca/V8_pca.npz,pca/scree_V8.png
+inline-4,ok,2100,60,6,0.9981731176376343,pca/inline-4_pca.npz,pca/scree_inline-4.png
+inline-6,ok,2100,60,5,0.9986068606376648,pca/inline-6_pca.npz,pca/scree_inline-6.png
+single-cylinder,ok,2050,60,6,0.9974736571311951,pca/single-cylinder_pca.npz,pca/scree_single-cylinder.png

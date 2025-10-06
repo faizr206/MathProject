@@ -1,0 +1,16 @@
+{
+  "train": {
+    "V6": 43,
+    "V8": 48,
+    "inline-4": 47,
+    "inline-6": 50,
+    "single-cylinder": 47
+  },
+  "test": {
+    "V6": 11,
+    "V8": 12,
+    "inline-4": 13,
+    "inline-6": 10,
+    "single-cylinder": 12
+  }
+}

@@ -1,0 +1,39 @@
+== Global PCA ==
+Kept d_glob=14 (≥95% var, cap 100)
+
+== Outlier trimming ==
+Trimmed 91 (10% per class)
+
+== Shared dimension & rule (CV) ==
+SHARED_D=15, BEST_RULE=residual_normed
+Grid search saved at cv_shared_d_rule_grid.csv
+
+== Final evaluation on full set ==
+Majority baseline acc: 0.528 (majority='yes')
+{
+  "no": {
+    "precision": 0.48470588235294115,
+    "recall": 0.4779582366589327,
+    "f1-score": 0.48130841121495327,
+    "support": 431.0
+  },
+  "yes": {
+    "precision": 0.5398773006134969,
+    "recall": 0.546583850931677,
+    "f1-score": 0.5432098765432098,
+    "support": 483.0
+  },
+  "accuracy": 0.5142231947483589,
+  "macro avg": {
+    "precision": 0.512291591483219,
+    "recall": 0.5122710437953049,
+    "f1-score": 0.5122591438790816,
+    "support": 914.0
+  },
+  "weighted avg": {
+    "precision": 0.5138610191361451,
+    "recall": 0.5142231947483589,
+    "f1-score": 0.5140200170722268,
+    "support": 914.0
+  }
+}

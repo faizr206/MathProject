@@ -1,0 +1,7 @@
+# This file is used internally by FFMPEG.
+file 'file:/Users/faiz.ramadhan/Documents/Programming/MathProject/Video/media/videos/template/1080p60/partial_movie_files/SomeScene/3977891868_4180480811_223132457.mp4'
+file 'file:/Users/faiz.ramadhan/Documents/Programming/MathProject/Video/media/videos/template/1080p60/partial_movie_files/SomeScene/2852726489_1413902947_828069531.mp4'
+file 'file:/Users/faiz.ramadhan/Documents/Programming/MathProject/Video/media/videos/template/1080p60/partial_movie_files/SomeScene/2852726489_2544267358_3718638895.mp4'
+file 'file:/Users/faiz.ramadhan/Documents/Programming/MathProject/Video/media/videos/template/1080p60/partial_movie_files/SomeScene/2852726489_2408024828_3236755199.mp4'
+file 'file:/Users/faiz.ramadhan/Documents/Programming/MathProject/Video/media/videos/template/1080p60/partial_movie_files/SomeScene/2852726489_962131673_1424846770.mp4'
+file 'file:/Users/faiz.ramadhan/Documents/Programming/MathProject/Video/media/videos/template/1080p60/partial_movie_files/SomeScene/2852726489_1839128356_3926985066.mp4'

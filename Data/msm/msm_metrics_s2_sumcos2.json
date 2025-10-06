@@ -1,0 +1,16 @@
+{
+  "classes": [
+    "V6",
+    "V8",
+    "inline-4",
+    "inline-6",
+    "single-cylinder"
+  ],
+  "r_class": 5,
+  "s_clip": 2,
+  "metric": "sumcos2",
+  "robust": false,
+  "overall_accuracy": 0.1590909090909091,
+  "macro_accuracy": 0.15555555555555553,
+  "n_test_clips": 88
+}
