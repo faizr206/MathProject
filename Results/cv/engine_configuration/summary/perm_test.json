@@ -1,8 +1,8 @@
 {
-  "representative_fold": 2,
-  "observed_overall": 0.2542372881355932,
-  "perm_mean_acc": 0.20347457627118642,
-  "perm_std_acc": 0.05488222222701716,
+  "representative_fold": 1,
+  "observed_overall": 0.2711864406779661,
+  "perm_mean_acc": 0.18513559322033898,
+  "perm_std_acc": 0.049069687619075084,
   "chance_baseline": 0.2,
-  "perm_runs": 200
+  "perm_runs": 10000
 }

@@ -1,0 +1,55 @@
+{
+  "B_PERM": 10000,
+  "per_fold": [
+    {
+      "observed_overall": 0.13559322033898305,
+      "perm_mean_acc": 0.19058305084745764,
+      "perm_std_acc": 0.0505223182029356,
+      "p_value": 0.9017098290170983,
+      "fold": 0
+    },
+    {
+      "observed_overall": 0.2711864406779661,
+      "perm_mean_acc": 0.18548813559322033,
+      "perm_std_acc": 0.04922333172486346,
+      "p_value": 0.06369363063693631,
+      "fold": 1
+    },
+    {
+      "observed_overall": 0.23728813559322035,
+      "perm_mean_acc": 0.20492033898305084,
+      "perm_std_acc": 0.051743366874535554,
+      "p_value": 0.3150684931506849,
+      "fold": 2
+    },
+    {
+      "observed_overall": 0.3275862068965517,
+      "perm_mean_acc": 0.19825172413793105,
+      "perm_std_acc": 0.05206838901256551,
+      "p_value": 0.012898710128987101,
+      "fold": 3
+    },
+    {
+      "observed_overall": 0.27586206896551724,
+      "perm_mean_acc": 0.21515517241379312,
+      "perm_std_acc": 0.05230637529548118,
+      "p_value": 0.15608439156084392,
+      "fold": 4
+    }
+  ],
+  "combined": {
+    "fisher": {
+      "X2": 20.44016970739002,
+      "df": 10,
+      "p_approx": 0.025337067925632662,
+      "note": "Wilson\u2013Hilferty approximation to chi-square tail; acceptable for reporting."
+    },
+    "pooled_mean": {
+      "observed_mean_overall": 0.2495032144944477,
+      "perm_mean_of_means": 0.19902277030976037,
+      "perm_std_of_means": 0.022738759426225576,
+      "p_value": 0.013598640135986401,
+      "note": "Empirical permutation p-value comparing mean accuracy across folds."
+    }
+  }
+}

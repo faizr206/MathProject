@@ -24,8 +24,9 @@ D = 60                         # feature dimension (MFCC-20+Δ+ΔΔ)
 R_UNIFORM = 5                  # class subspace rank (fixed across folds)
 Q_TRIM = 0.40                  # keep lowest q% frames within-clip
 K_MIN = 10                     # min frames kept; else fallback to median
-B_BOOT = 10                    # bootstraps per class
+B_BOOT = 1000                    # bootstraps per class
 BOOT_P = 0.70                  # % of TRAIN clips per bootstrap
+B_PERM = 10000
 EPS = 1e-8                     # for calibration std
 
 # ---------------------- Small utilities ----------------------
@@ -81,6 +82,70 @@ def plot_scree(cum: np.ndarray, out_path: str, title: str):
     plt.savefig(out_path, dpi=150)
     plt.close()
 
+def plot_stability_violin(angles_by_class: Dict[str, List[float]],
+                          classes: List[str],
+                          out_path: str):
+    """
+    angles_by_class: dict[class] -> list of bootstrap largest angles (degrees), pooled across folds.
+    Saves a violin plot to out_path.
+    """
+    # Keep classes with at least one angle
+    labels = []
+    data = []
+    for c in classes:
+        vals = angles_by_class.get(c, [])
+        if len(vals) > 0:
+            labels.append(c)
+            data.append(vals)
+
+    if len(data) == 0:
+        # Nothing to plot
+        return
+
+    # Wider figure if many classes
+    plt.figure(figsize=(max(6, 0.6 * len(labels) + 3), 5))
+    parts = plt.violinplot(data, showmeans=False, showmedians=True, showextrema=True)
+
+    # Light styling
+    for pc in parts.get('bodies', []):
+        pc.set_alpha(0.6)
+
+    # Ticks start at 1 for violinplot
+    plt.xticks(np.arange(1, len(labels) + 1), labels, rotation=45, ha='right')
+    plt.ylabel("Largest bootstrap principal angle (°)")
+    plt.title("Stability (pooled across folds)")
+    plt.tight_layout()
+    plt.savefig(out_path, dpi=150)
+    plt.close()
+
+# NEW: reusable heatmap plotter for between-class angles
+def plot_angles_heatmap(mat: np.ndarray, classes: List[str], out_path: str, title: str):
+    plt.figure(figsize=(6,5))
+    im = plt.imshow(mat, interpolation="nearest")
+    plt.colorbar(im, fraction=0.046, pad=0.04)
+    ticks = np.arange(len(classes))
+    plt.xticks(ticks, classes, rotation=45, ha='right')
+    plt.yticks(ticks, classes)
+
+    finite_vals = mat[np.isfinite(mat)]
+    if finite_vals.size:
+        thresh = (np.nanmax(finite_vals) + np.nanmin(finite_vals)) / 2.0
+    else:
+        thresh = 0.0
+
+    for i in range(mat.shape[0]):
+        for j in range(mat.shape[1]):
+            v = mat[i, j]
+            txt = "nan" if not np.isfinite(v) else f"{v:.1f}"
+            plt.text(j, i, txt, ha="center", va="center",
+                     color="white" if (np.isfinite(v) and v > thresh) else "black",
+                     fontsize=9)
+    plt.title(title)
+    plt.tight_layout()
+    plt.savefig(out_path, dpi=150)
+    plt.close()
+
+
 def principal_angles_rad(U1: np.ndarray, U2: np.ndarray) -> np.ndarray:
     if U1.size == 0 or U2.size == 0:
         return np.array([], dtype=np.float32)
@@ -113,7 +178,8 @@ def residuals_to_subspace(X: np.ndarray, mu: np.ndarray, U: np.ndarray) -> np.nd
         coeff = Xc @ U
         proj = np.sum(coeff * coeff, axis=1)
         resid2 = np.maximum(tot - proj, 0.0)
-    return np.sqrt(resid2, dtype=np.float32)
+    return np.sqrt(resid2).astype(np.float32)
+
 
 def trimmed_mean_best(resids: np.ndarray, q: float = Q_TRIM, min_k: int = K_MIN) -> float:
     n = resids.size
@@ -125,6 +191,65 @@ def trimmed_mean_best(resids: np.ndarray, q: float = Q_TRIM, min_k: int = K_MIN)
     k = max(min_k, min(k, n))
     part = np.partition(resids, k-1)[:k]
     return float(np.mean(part))
+
+# --- NEW: helpers for across-fold permutation significance -----------------
+
+def preds_from_scores_long(df_long: pd.DataFrame) -> pd.DataFrame:
+    """
+    Reconstruct per-clip predictions from scores_long (long format with column 'Z').
+    Returns a DataFrame with columns: filename, true, pred
+    """
+    per_clip = df_long[["filename", "true"]].drop_duplicates()
+    # pick class with minimum Z per clip
+    idx = df_long.groupby("filename")["Z"].idxmin()
+    preds = df_long.loc[idx, ["filename", "class"]].rename(columns={"class": "pred"})
+    return per_clip.merge(preds, on="filename", how="left")
+
+
+def permutation_test_for_fold_from_scores(df_long: pd.DataFrame,
+                                          classes: List[str],
+                                          B: int,
+                                          seed: int) -> Dict[str, float]:
+    """
+    One-sided permutation test for a single fold:
+    p = P(perm accuracy >= observed accuracy) under label shuffling.
+    Returns dict with observed, perm_mean, perm_std, p_value.
+    """
+    pc = preds_from_scores_long(df_long)
+    y_true = pc["true"].to_numpy()
+    y_pred = pc["pred"].to_numpy()
+    obs = float(np.mean(y_true == y_pred))
+
+    rng = np.random.default_rng(seed)
+    perm_accs = np.empty(B, dtype=np.float64)
+    for b in range(B):
+        y_perm = rng.permutation(y_true)
+        perm_accs[b] = np.mean(y_perm == y_pred)
+
+    # +1/+1 to avoid zero p-values
+    p = float((1 + np.sum(perm_accs >= obs)) / (1 + B))
+    return {
+        "observed_overall": obs,
+        "perm_mean_acc": float(np.mean(perm_accs)),
+        "perm_std_acc": float(np.std(perm_accs)),
+        "p_value": p
+    }
+
+
+def chi2_sf_wilson_hilferty(x: float, df: int) -> float:
+    """
+    Approximate chi-square survival function P(Chi^2_df >= x)
+    using the Wilson–Hilferty normal approximation.
+    Good enough for reporting a combined Fisher p-value without SciPy.
+    """
+    if x <= 0:
+        return 1.0
+    v = float(df)
+    # z ~ N(0,1)
+    z = ((x / v) ** (1.0 / 3.0) - (1.0 - 2.0 / (9.0 * v))) / math.sqrt(2.0 / (9.0 * v))
+    # SF = 1 - Phi(z) = 0.5 * erfc(z / sqrt(2))
+    return 0.5 * math.erfc(z / math.sqrt(2.0))
+
 
 # ---------------------- Feature source abstraction ----------------------
 class FrameSource:
@@ -243,7 +368,8 @@ def fit_class_subspaces(train_clips_by_class: Dict[str, List[str]],
     return out
 
 # ---------------------- Split helpers ----------------------
-def make_cv_splits(meta: pd.DataFrame, attribute: str, n_splits: int = 5) -> List[Tuple[np.ndarray, np.ndarray]]:
+def make_cv_splits(meta: pd.DataFrame, attribute: str, n_splits: int = 5
+) -> Tuple[List[Tuple[np.ndarray, np.ndarray]], pd.DataFrame]:
     """
     meta has columns: filename, attribute
     Returns list of (train_idx, test_idx) over the *clip-level* rows.
@@ -407,6 +533,11 @@ def run_cv(attribute: str,
         raise RuntimeError("Not enough classes/clips for CV after filtering.")
 
     classes = sorted(keep_classes)
+    # NEW: fold-aggregation stores for mean plots
+    agg_cum_evr = {c: [] for c in classes}   # list of cumulative EVR arrays per fold
+    agg_cms: List[np.ndarray] = []           # confusion matrices across folds
+    agg_angle_mats: List[np.ndarray] = []    # between-class angle matrices across folds
+
     # Build folds
     folds, clip_table = make_cv_splits(clip_df, attribute, n_splits=5)
 
@@ -450,10 +581,16 @@ def run_cv(attribute: str,
         for c in classes:
             evr = subspaces[c]["evr"]
             cum = subspaces[c]["cum_evr"]
-            # scree fig
+
+            # keep cumulative EVR for aggregation
             if cum.size > 0:
-                plot_scree(cum, os.path.join(scree_dir, f"scree_{canonicalize(c)}.png"),
-                           f"Scree — {c} (Fold {k})")
+                agg_cum_evr[c].append(cum.copy())
+                # per-fold scree (optional)
+                plot_scree(
+                    cum,
+                    os.path.join(scree_dir, f"scree_{canonicalize(c)}.png"),
+                    f"Scree — {c} (Fold {k})"
+                )
             # EVR@5 (if fewer comps, take last cum)
             if cum.size == 0:
                 evr5 = np.nan
@@ -495,6 +632,9 @@ def run_cv(attribute: str,
                                   test_clips_tbl[attribute].tolist()))
         nsc = calibrated_nsc(test_clip_list, classes, subspaces, train_by_class, fs,
                              q=Q_TRIM, K=K_MIN, do_plots=plots, out_dir=fold_dir)
+
+        agg_cms.append(nsc["cm"])
+
         # save metrics
         with open(os.path.join(fold_dir, "nsc_accuracy.json"), "w") as f:
             json.dump({"overall": nsc["overall"], "macro": nsc["macro"]}, f, indent=2)
@@ -522,6 +662,9 @@ def run_cv(attribute: str,
                     else:
                         val = largest_principal_angle_deg(Ui[:, :r_used], Uj[:, :r_used])
                 mat[i, j] = mat[j, i] = val
+        
+        agg_angle_mats.append(mat.copy())
+
         angles_df = pd.DataFrame(mat, index=classes, columns=classes)
         angles_df.to_csv(os.path.join(fold_dir, "between_class_angles.csv"))
         # heatmap
@@ -585,20 +728,132 @@ def run_cv(attribute: str,
                             "iqr25_deg": iqr25, "iqr75_deg": iqr75})
     pd.DataFrame(tableC_rows).to_csv(os.path.join(summary_dir, "table_C_stability.csv"), index=False)
 
-    # Representative fold = median overall accuracy
+    # Violin plot of stability (pooled across folds) -> summary dir
+    violin_path = os.path.join(figs_dir, "stability_violin.png")
+    plot_stability_violin(agg_stab_raw, classes, violin_path)
+
+    # --------- Aggregated (mean-across-folds) figures -> saved as rep_*.png ---------
+
+    # (A) Scree curves: mean cumulative EVR per class (up to R_UNIFORM or max available)
+    for c in classes:
+        arrs = agg_cum_evr[c]
+        if not arrs:
+            continue
+        # limit to positions where at least one fold has a value; cap at R_UNIFORM
+        L = min(max(len(a) for a in arrs), R_UNIFORM)
+        M = np.full((len(arrs), L), np.nan, dtype=np.float64)
+        for i, a in enumerate(arrs):
+            Li = min(L, len(a))
+            if Li > 0:
+                M[i, :Li] = a[:Li]
+        mean_cum = np.nanmean(M, axis=0).astype(np.float64)
+        outp = os.path.join(figs_dir, f"rep_scree_{canonicalize(c)}.png")
+        plot_scree(mean_cum, outp, title=f"Scree — {c} (mean across folds)")
+
+    # (B) Confusion matrices: sum across folds, then plot raw and row-normalized
+    if len(agg_cms) > 0:
+        cm_sum = np.zeros_like(agg_cms[0], dtype=np.int64)
+        for cm in agg_cms:
+            cm_sum += cm.astype(np.int64)
+        plot_confmat(cm_sum, classes, os.path.join(figs_dir, "rep_confusion_raw.png"), normalize=False)
+        plot_confmat(cm_sum, classes, os.path.join(figs_dir, "rep_confusion_norm.png"), normalize=True)
+
+    # (C) Between-class angles: elementwise mean across folds (ignoring NaNs)
+    if len(agg_angle_mats) > 0:
+        stack = np.stack(agg_angle_mats, axis=0)  # (F, C, C)
+        mean_mat = np.nanmean(stack, axis=0)
+        plot_angles_heatmap(
+            mean_mat, classes,
+            os.path.join(figs_dir, "rep_angles_heatmap.png"),
+            title="Between-class largest angle (°) — mean across folds"
+        )
+
+    # Keep permutation test on the median-accuracy fold (unchanged)
     med_fold = int(df_nsc.sort_values("overall")["fold"].iloc[len(df_nsc)//2])
     rep_fold_dir = os.path.join(base_dir, f"fold_{med_fold}")
-    # copy figures (all scree, both confusions, angle heatmap)
-    # scree
-    sdir = os.path.join(rep_fold_dir, "scree")
-    if os.path.isdir(sdir):
-        for fn in os.listdir(sdir):
-            if fn.endswith(".png"):
-                shutil.copy2(os.path.join(sdir, fn), os.path.join(figs_dir, f"rep_{fn}"))
-    for fn in ["confusion_raw.png", "confusion_norm.png", "angles_heatmap.png"]:
-        src = os.path.join(rep_fold_dir, fn)
-        if os.path.exists(src):
-            shutil.copy2(src, os.path.join(figs_dir, f"rep_{fn}"))
+
+    # --- NEW: Permutation significance combined across folds ----------------
+    # Compute per-fold permutation p-values, then combine via Fisher's method,
+    # and also compute a pooled "mean-of-folds" permutation p-value.
+
+    per_fold_results = []
+    per_fold_perm_means = []   # store per-permutation means for pooled test
+
+    # We also need the observed accuracies across folds for the pooled-mean test
+    observed_overalls = []
+
+    for k in range(len(agg_cms)):
+        fold_dir_k = os.path.join(base_dir, f"fold_{k}")
+        scores_k = pd.read_csv(os.path.join(fold_dir_k, "clip_scores.csv"))
+
+        # Per-fold permutation (one-sided) using label shuffling
+        res_k = permutation_test_for_fold_from_scores(
+            scores_k, classes, B=B_PERM, seed=RANDOM_SEED_NUM + k
+        )
+        res_k["fold"] = k
+        per_fold_results.append(res_k)
+        observed_overalls.append(res_k["observed_overall"])
+
+        # For pooled-mean test, we need all B permutation accuracies per fold.
+        # Re-run once but keep the vector (to avoid changing the helper signature):
+        pc = preds_from_scores_long(scores_k)
+        y_true = pc["true"].to_numpy()
+        y_pred = pc["pred"].to_numpy()
+        rng = np.random.default_rng(RANDOM_SEED_NUM + 10_000 + k)
+
+        perm_accs_k = np.empty(B_PERM, dtype=np.float64)
+        for b in range(B_PERM):
+            y_perm = rng.permutation(y_true)
+            perm_accs_k[b] = np.mean(y_perm == y_pred)
+        per_fold_perm_means.append(perm_accs_k)
+
+    # Combine per-fold p-values via Fisher's method
+    p_vals = np.array([max(1e-300, r["p_value"]) for r in per_fold_results], dtype=np.float64)  # guard log(0)
+    fisher_X2 = float(-2.0 * np.sum(np.log(p_vals)))
+    fisher_df = 2 * len(per_fold_results)
+    fisher_p_approx = float(chi2_sf_wilson_hilferty(fisher_X2, fisher_df))
+
+    # Pooled permutation for the mean across folds
+    obs_mean = float(np.mean(observed_overalls))
+    stack = np.stack(per_fold_perm_means, axis=0)      # shape: (F, B_PERM)
+    perm_mean_across_folds = np.mean(stack, axis=0)    # shape: (B_PERM,)
+    pooled_p = float((1 + np.sum(perm_mean_across_folds >= obs_mean)) / (1 + B_PERM))
+
+    # Summaries to JSON
+    perm_summary_all = {
+        "B_PERM": B_PERM,
+        "per_fold": per_fold_results,  # each contains: fold, observed_overall, perm_mean_acc, perm_std_acc, p_value
+        "combined": {
+            "fisher": {
+                "X2": fisher_X2,
+                "df": fisher_df,
+                "p_approx": fisher_p_approx,
+                "note": "Wilson–Hilferty approximation to chi-square tail; acceptable for reporting."
+            },
+            "pooled_mean": {
+                "observed_mean_overall": obs_mean,
+                "perm_mean_of_means": float(np.mean(perm_mean_across_folds)),
+                "perm_std_of_means": float(np.std(perm_mean_across_folds)),
+                "p_value": pooled_p,
+                "note": "Empirical permutation p-value comparing mean accuracy across folds."
+            }
+        }
+    }
+    with open(os.path.join(summary_dir, "perm_across_folds.json"), "w") as f:
+        json.dump(perm_summary_all, f, indent=2)
+
+    
+    # # copy figures (all scree, both confusions, angle heatmap)
+    # # scree
+    # sdir = os.path.join(rep_fold_dir, "scree")
+    # if os.path.isdir(sdir):
+    #     for fn in os.listdir(sdir):
+    #         if fn.endswith(".png"):
+    #             shutil.copy2(os.path.join(sdir, fn), os.path.join(figs_dir, f"rep_{fn}"))
+    # for fn in ["confusion_raw.png", "confusion_norm.png", "angles_heatmap.png"]:
+    #     src = os.path.join(rep_fold_dir, fn)
+    #     if os.path.exists(src):
+    #         shutil.copy2(src, os.path.join(figs_dir, f"rep_{fn}"))
 
     # Permutation test (once) on the representative fold
     # Shuffle TEST labels by clip, recompute accuracy (using the already saved per-clip predictions)
@@ -616,7 +871,7 @@ def run_cv(attribute: str,
     rng = np.random.default_rng(RANDOM_SEED_NUM)
     chance = 1.0 / len(classes)
     perm_accs = []
-    for _ in range(200):
+    for _ in range(B_PERM):
         y_perm = rng.permutation(y_true)
         perm_accs.append(float(np.mean(y_perm == y_pred)))
     perm_summary = {
@@ -625,7 +880,7 @@ def run_cv(attribute: str,
         "perm_mean_acc": float(np.mean(perm_accs)),
         "perm_std_acc": float(np.std(perm_accs)),
         "chance_baseline": chance,
-        "perm_runs": 200
+        "perm_runs": B_PERM
     }
     with open(os.path.join(summary_dir, "perm_test.json"), "w") as f:
         json.dump(perm_summary, f, indent=2)

@@ -1,0 +1,33 @@
+{
+  "attribute": "engine_configuration",
+  "n_mfcc": 20,
+  "n_mels": 64,
+  "sr": 22050,
+  "n_fft": 2048,
+  "hop_length": 512,
+  "griffin_lim_iters": 64,
+  "duration_seconds": 2.0,
+  "top_r": 5,
+  "k_sigma": 2.0,
+  "fmin": 20.0,
+  "fmax_fraction_of_nyquist": 1.0,
+  "feature_D_total": 60,
+  "pca_filtered_frames_limit": 20000,
+  "overlay_curve": "pca_filtered_mean",
+  "normalize": "refhz",
+  "ref_hz": 200.0,
+  "bands": [
+    [
+      50.0,
+      200.0
+    ],
+    [
+      200.0,
+      800.0
+    ],
+    [
+      800.0,
+      3000.0
+    ]
+  ]
+}

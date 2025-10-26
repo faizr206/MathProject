@@ -8,31 +8,44 @@
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Dataset summary (per-fold averages).}}{2}{table.caption.1}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{tab:data}{{1}{2}{Dataset summary (per-fold averages)}{table.caption.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Methods (Subspace Modeling \& Classification)}{2}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Results}{3}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Low-Dimensionality}{3}{subsection.5.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces EVR@5 (mean $\pm $ SD across folds).}}{3}{table.caption.2}\protected@file@percent }
-\newlabel{tab:evr}{{2}{3}{EVR@5 (mean $\pm $ SD across folds)}{table.caption.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Representative scree plots (cumulative EVR\xspace  ) with \ensuremath  {r}\xspace  =5 marked. Fold chosen by median overall accuracy.}}{3}{figure.caption.3}\protected@file@percent }
-\newlabel{fig:scree}{{1}{3}{Representative scree plots (cumulative \EVR ) with \rankr =5 marked. Fold chosen by median overall accuracy}{figure.caption.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Stability}{3}{subsection.5.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Stability of class subspaces (largest principal angle, degrees).}}{3}{table.caption.4}\protected@file@percent }
-\newlabel{tab:stability}{{3}{3}{Stability of class subspaces (largest principal angle, degrees)}{table.caption.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Stability distributions (violin of bootstrapped largest angles in degrees). Lower medians and tighter IQRs indicate more stable subspaces.}}{4}{figure.caption.5}\protected@file@percent }
-\newlabel{fig:stability}{{2}{4}{Stability distributions (violin of bootstrapped largest angles in degrees). Lower medians and tighter IQRs indicate more stable subspaces}{figure.caption.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces NSC\xspace  \ accuracy across folds. Chance baseline: $1/5=\SI {20}{\percent }$.}}{4}{table.caption.7}\protected@file@percent }
-\newlabel{tab:nsc}{{4}{4}{\NSC \ accuracy across folds. Chance baseline: $1/5=\SI {20}{\percent }$}{table.caption.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Between-class largest principal angles (degrees), representative (median-accuracy) fold. Closest pair: inline-4 vs.\ V8 (\ang {26.8}); most separated: V8 vs.\ inline-6 (\ang {87.1}).}}{5}{figure.caption.6}\protected@file@percent }
-\newlabel{fig:angles}{{3}{5}{Between-class largest principal angles (degrees), representative (median-accuracy) fold. Closest pair: inline-4 vs.\ V8 (\ang {26.8}); most separated: V8 vs.\ inline-6 (\ang {87.1})}{figure.caption.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Confusion matrices (representative fold selected by median overall accuracy). Confusions align with closest pairs in angle space (e.g., inline-4 $\leftrightarrow $ V8).}}{6}{figure.caption.8}\protected@file@percent }
-\newlabel{fig:confusion}{{4}{6}{Confusion matrices (representative fold selected by median overall accuracy). Confusions align with closest pairs in angle space (e.g., inline-4 $\leftrightarrow $ V8)}{figure.caption.8}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Between-Class Geometry}{6}{subsection.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Discriminativeness (NSC\xspace  )}{6}{subsection.5.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Evaluation Depth: Baselines, Ablations, and Diagnostics}{6}{section.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Baseline Models}{6}{subsection.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Ablations}{7}{subsection.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Diagnostics \& Error Analysis}{7}{subsection.6.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}Analysis \& Interpretation}{7}{section.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {8}Limitations \& Future Work}{7}{section.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {9}Reproducibility}{8}{section.9}\protected@file@percent }
-\gdef \@abspage@last{9}
+\@writefile{toc}{\contentsline {paragraph}{Representation choice: MFCC vs.\ FFT.}{2}{section*.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Low-rank compressibility across representations (cumulative EVR and rank needed for coverage).}}{3}{table.caption.3}\protected@file@percent }
+\newlabel{tab:repr_evr}{{2}{3}{Low-rank compressibility across representations (cumulative EVR and rank needed for coverage)}{table.caption.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Cumulative explained variance (EVR) curves comparing PCA on MFCC-60 vs.\ FFT magnitudes (513-D) with and without log compression. MFCCs rise steeply, indicating stronger low-rank structure; FFT variants require substantially higher rank to reach the same coverage.}}{3}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:scree-mfcc-fft}{{1}{3}{Cumulative explained variance (EVR) curves comparing PCA on MFCC-60 vs.\ FFT magnitudes (513-D) with and without log compression. MFCCs rise steeply, indicating stronger low-rank structure; FFT variants require substantially higher rank to reach the same coverage}{figure.caption.4}{}}
+\@writefile{toc}{\contentsline {paragraph}{MFCC illustration and example.}{4}{section*.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Example features from a 10\,s engine clip (22.05\,kHz, \texttt  {frame\_length=2048}, \texttt  {hop\_length=512}). The MFCC panel stacks static coefficients with $\Delta $ and $\Delta \Delta $ (total \ensuremath  {D}\xspace  =60).}}{4}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:mfcc_example}{{2}{4}{Example features from a 10\,s engine clip (22.05\,kHz, \texttt {frame\_length=2048}, \texttt {hop\_length=512}). The MFCC panel stacks static coefficients with $\Delta $ and $\Delta \Delta $ (total \D =60)}{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Methods (Subspace Modeling \& Classification)}{4}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Uncertainty \& significance.}{6}{section*.14}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Results}{7}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Low-Dimensionality}{7}{subsection.5.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces EVR@5 (mean $\pm $ SD across folds).}}{7}{table.caption.15}\protected@file@percent }
+\newlabel{tab:evr}{{3}{7}{EVR@5 (mean $\pm $ SD across folds)}{table.caption.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Representative scree plots (cumulative EVR\xspace  ) with \ensuremath  {r}\xspace  =5 marked. Fold chosen by median overall accuracy.}}{7}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:scree}{{3}{7}{Representative scree plots (cumulative \EVR ) with \rankr =5 marked. Fold chosen by median overall accuracy}{figure.caption.16}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Interpretability via Subspace-to-Spectrum Inversion}{7}{subsection.5.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Subspace-to-spectrum inversion (engine configuration): cross-class overlay of \emph  {PCA-filtered mean} spectra (project $\rightarrow $ invert $\rightarrow $ average), with reference-Hz normalization at 200\,Hz. Inline configurations concentrate slightly more energy in 0.8--3\,kHz, whereas V-configurations are rounder; single-cylinder shows the highest centroid due to stronger upper-band content.}}{9}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:inversion-plot}{{4}{9}{Subspace-to-spectrum inversion (engine configuration): cross-class overlay of \emph {PCA-filtered mean} spectra (project $\rightarrow $ invert $\rightarrow $ average), with reference-Hz normalization at 200\,Hz. Inline configurations concentrate slightly more energy in 0.8--3\,kHz, whereas V-configurations are rounder; single-cylinder shows the highest centroid due to stronger upper-band content}{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Per-class comparison (V8): \emph  {data mean} (no PCA), \emph  {model mean} (invert mean MFCC once), and \emph  {PCA-filtered mean} (project $\rightarrow $ invert $\rightarrow $ average). The PCA-filtered mean better matches the envelope while suppressing out-of-subspace variance, motivating its use in the cross-class overlay.}}{9}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:inversion-bundle-v8}{{5}{9}{Per-class comparison (V8): \emph {data mean} (no PCA), \emph {model mean} (invert mean MFCC once), and \emph {PCA-filtered mean} (project $\rightarrow $ invert $\rightarrow $ average). The PCA-filtered mean better matches the envelope while suppressing out-of-subspace variance, motivating its use in the cross-class overlay}{figure.caption.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Principal-direction excursions (Inline-4): PC1 behaves like a ``brightness'' control, shifting energy between low and high bands while preserving the overall envelope shape.}}{10}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:pc1-excursions-inline4}{{6}{10}{Principal-direction excursions (Inline-4): PC1 behaves like a ``brightness'' control, shifting energy between low and high bands while preserving the overall envelope shape}{figure.caption.19}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Stability}{10}{subsection.5.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Stability of class subspaces (largest principal angle, degrees).}}{10}{table.caption.20}\protected@file@percent }
+\newlabel{tab:stability}{{4}{10}{Stability of class subspaces (largest principal angle, degrees)}{table.caption.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Stability distributions (violin of bootstrapped largest angles in degrees). Lower medians and tighter IQRs indicate more stable subspaces.}}{11}{figure.caption.21}\protected@file@percent }
+\newlabel{fig:stability}{{7}{11}{Stability distributions (violin of bootstrapped largest angles in degrees). Lower medians and tighter IQRs indicate more stable subspaces}{figure.caption.21}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Between-Class Geometry}{12}{subsection.5.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Between-class largest principal angles (degrees), mean across folds. Closest pair: V8 vs.\ single-cylinder (\ang {25.3}); most separated: V6 vs.\ inline-4 (\ang {55.2}).}}{12}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:angles}{{8}{12}{Between-class largest principal angles (degrees), mean across folds. Closest pair: V8 vs.\ single-cylinder (\ang {25.3}); most separated: V6 vs.\ inline-4 (\ang {55.2})}{figure.caption.22}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5}Discriminativeness (NSC\xspace  )}{12}{subsection.5.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces NSC\xspace  \ accuracy across folds. Chance baseline: $1/5=\SI {20}{\percent }$.}}{12}{table.caption.23}\protected@file@percent }
+\newlabel{tab:nsc}{{5}{12}{\NSC \ accuracy across folds. Chance baseline: $1/5=\SI {20}{\percent }$}{table.caption.23}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Confusion matrices aggregated across 5 folds (left: row-normalized; right: raw counts). Confusions align with closest pairs in angle space (e.g., V8 $\leftrightarrow $ single-cylinder).}}{13}{figure.caption.24}\protected@file@percent }
+\newlabel{fig:confusion}{{9}{13}{Confusion matrices aggregated across 5 folds (left: row-normalized; right: raw counts). Confusions align with closest pairs in angle space (e.g., V8 $\leftrightarrow $ single-cylinder)}{figure.caption.24}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Analysis \& Interpretation}{14}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Reproducibility.}{15}{section*.25}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Synthesis.}{15}{section*.26}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Limitations \& Future Work}{15}{section.7}\protected@file@percent }
+\gdef \@abspage@last{16}

@@ -9,6 +9,8 @@
 % --- Layout ---
 \usepackage[margin=1in]{geometry}
 \usepackage{setspace}
+\usepackage{float}
+\usepackage[section]{placeins}
 \setstretch{1.1}
 
 % --- Math & symbols ---
@@ -47,8 +49,13 @@
 \maketitle
 
 \begin{abstract}
-We study whether engine sounds with a fixed attribute live in low-dimensional, stable, and moderately discriminative linear subspaces. Using 5-fold cross-validation on the attribute \texttt{engine\_configuration} with MFCC features (20 + $\Delta$ + $\Delta\Delta \rightarrow \D=60$), we fit class-conditional PCA subspaces (uniform rank \rankr=5) on \textsc{train} frames, assess stability via bootstrapped principal angles, and evaluate discriminativeness using a calibrated nearest-subspace classifier (\NSC) with trimmed aggregation ($q=0.40$, $K\ge 10$). Results show that \rankr=5 captures roughly \SIrange{94}{96}{\percent} cumulative explained variance (\EVR) across classes; bootstrapped largest principal angles are typically modest (medians $\approx$ \ang{12}--\ang{18} for most classes; inline-6 is weaker); and \NSC achieves \SI{25.6(2.0)}{\percent} overall accuracy vs.\ \SI{20}{\percent} chance. Between-class geometry aligns with confusions: the closest class pairs in angle space drive misclassifications. \textbf{Practically}, low-rank, stable subspaces promise compact indexing, robust similarity search, and interpretable diagnostics for engine audio analytics.
+We ask whether engine sounds sharing a fixed attribute live in low-dimensional, stable, and moderately discriminative linear subspaces. Using 5-fold cross-validation on \texttt{engine\_configuration}, we extract MFCC features (20 + $\Delta$ + $\Delta\Delta$, so $\D=60$), fit class-conditional PCA subspaces with a uniform rank $\rankr=5$ on \textsc{train} frames, quantify stability via bootstrapped principal angles, and evaluate discriminativeness with a calibrated nearest-subspace classifier (\NSC) using trimmed aggregation ($q=0.40$, $K\!\ge\!10$).
+
+At $\rankr=5$, cumulative explained variance is \SIrange{92}{94}{\percent} across classes, supporting a low-rank structure. Bootstrapped self-angles are modest (medians $\approx$\ang{13}--\ang{15}; inline-6 weaker), indicating subspace stability; between-class largest principal angles range $\approx$\ang{25}--\ang{55}, indicating partial overlap. \NSC attains \SI{25.0}{\percent}\,(7.1) accuracy versus a \SI{20}{\percent} chance baseline; a one-sided permutation test combined across folds via Fisher's method (Eq.~16) yields $\chi^2_{10}=20.44$, $p=0.0253$, confirming a statistically significant but practically small lift. Misclassifications track geometry: the closest class pairs in angle space account for most errors.
+
+\textbf{Implication.} Low-rank, reasonably stable subspaces enable compact indexing, robust similarity search, and interpretable diagnostics for engine-audio analytics, while the modest lift cautions against using subspaces alone for fine-grained classification.
 \end{abstract}
+
 
 \noindent\textbf{Keywords:} Audio representation, MFCC, PCA subspaces, principal angles, classification, robustness, bootstrapping.
 
@@ -66,13 +73,13 @@ This study treats \emph{engine configuration} as a physically grounded attribute
 
 \textbf{Attribute(s):} \texttt{engine\_configuration} (classes: V6, V8, inline-4, inline-6, single-cylinder).
 
-\textbf{Pipeline (from code):} Feature extraction: per-clip MFCC with deltas (\D=60) from frames uniformly selected per clip; per-clip CMVN by centering in the subspace pipeline. Subspaces: per-class PCA on \textsc{train} frames, uniform rank \rankr=5. Stability: bootstrap re-fitting on \textsc{train} ($B=10$ bootstraps, \SI{70}{\percent} of clips each) and reporting largest principal angles (degrees). Classification (\NSC): frame residuals to class subspaces $\rightarrow$ \emph{trimmed aggregation} per clip ($q=0.40$, one-sided upper-tail trim unless $K<10$; fallback to median) $\rightarrow$ per-class $z$-score calibration estimated on \textsc{train} $\rightarrow$ argmin on calibrated scores.
+\textbf{Pipeline (from code):} Feature extraction: per-clip MFCC with deltas (\D=60) from frames uniformly selected per clip; per-clip CMVN by centering in the subspace pipeline. Subspaces: per-class PCA on \textsc{train} frames, uniform rank \rankr=5. Stability: bootstrap re-fitting on \textsc{train} ($B=1000$ bootstraps, \SI{70}{\percent} of clips each) and reporting largest principal angles (degrees). Classification (\NSC): frame residuals to class subspaces $\rightarrow$ \emph{trimmed aggregation} per clip ($q=0.40$, one-sided upper-tail trim unless $K<10$; fallback to median) $\rightarrow$ per-class $z$-score calibration estimated on \textsc{train} $\rightarrow$ argmin on calibrated scores.
 
 \noindent\textit{Code references:} \texttt{prepare\_data.py}, \texttt{make\_mfcc\_frames.py}, \texttt{cv\_subspace\_pipeline.py}, \texttt{nsc\_calibrated.py}.
 
 \section{Data \& Features}
 
-Dataset composition: 5 classes; feature dimension \D=\num{60} (MFCC-20 + $\Delta$ + $\Delta\Delta$). Target sample rate 22.05 kHz, mono; frames from voiced audio with \texttt{frame\_length=2048}, \texttt{hop\_length=512}; up to $\sim$50 frames/clip in preprocessing. The 60-D setup is used throughout.
+Dataset composition: 5 classes; feature dimension \D=\num{60} (MFCC-20 + $\Delta$ + $\Delta\Delta$). Target sample rate 22.05 kHz, mono; frames from voiced audio with \texttt{frame\_length=2048}, \texttt{hop\_length=512}. The 60-D setup is used throughout.
 
 \begin{table}[!htbp]
 \caption{Dataset summary (per-fold averages).}
@@ -82,32 +89,158 @@ Dataset composition: 5 classes; feature dimension \D=\num{60} (MFCC-20 + $\Delta
 \toprule
 \textbf{Class} & \textbf{\#train} & \textbf{\#test} & \textbf{median frames/clip} \\
 \midrule
-V6               & 43.2 & 10.8 & \textit{n/a} \\
-V8               & 48.0 & 12.0 & \textit{n/a} \\
-inline-4         & 48.0 & 12.0 & \textit{n/a} \\
-inline-6         & 48.0 & 12.0 & \textit{n/a} \\
-single-cylinder  & 47.2 & 11.8 & \textit{n/a} \\
+V6               & 43.2 & 10.8 & 983.5 \\
+V8               & 48.0 & 12.0 & 992.5 \\
+inline-4         & 48.0 & 12.0 & 995.0 \\
+inline-6         & 48.0 & 12.0 & 998.0 \\
+single-cylinder  & 47.2 & 11.8 & 985.0 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\noindent\emph{Artifacts:} \path{../Results/cv/engine_configuration/fold_*/coverage.json}, \path{../Results/cv/engine_configuration/summary/table_A_lowdim.csv}.
+\noindent\emph{Artifacts:} \path{../Results/cv/engine_configuration/fold_*/coverage.json}, \path{../Results/cv/engine_configuration/summary/table_A_lowdim.csv}, \path{../Results/summary/frames_per_clip_by_class.csv}.
+
+\paragraph{Representation choice: MFCC vs.\ FFT.}
+We adopt MFCCs rather than raw FFT magnitudes because MFCCs (i) apply a \emph{mel-scaled filterbank} that smooths narrowband harmonics and noise into a perceptually weighted envelope, (ii) use \emph{log compression} to stabilize dynamic range, and (iii) decorrelate via the DCT so that a small rank captures most variance. Empirically, PCA fitted on MFCC-60 exhibits markedly stronger low-rank compressibility than PCA on linear-frequency FFT magnitudes (513-D), whether using raw magnitude or log-magnitude.
+
+\begin{table}[!htbp]
+\caption{Low-rank compressibility across representations (cumulative EVR and rank needed for coverage).}
+\label{tab:repr_evr}
+\centering
+\begin{tabular}{lrrrrr}
+\toprule
+\textbf{Representation} & \textbf{$\D$} & \textbf{EVR@5} & \textbf{EVR@10} & \textbf{$k$ for 90\%} & \textbf{$k$ for 95\%} \\
+\midrule
+MFCC+$\Delta$+$\Delta\Delta$ & 60  & \SI{91.9}{\percent} & \SI{96.5}{\percent} & 5   & 8   \\
+FFT\_mag                     & 513 & \SI{65.5}{\percent} & \SI{76.6}{\percent} & 32  & 60  \\
+FFT\_logmag                  & 513 & \SI{66.3}{\percent} & \SI{72.4}{\percent} & 74  & 128 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=\linewidth]{../Results/scree_mfcc_vs_fft.png}
+  \caption{Cumulative explained variance (EVR) curves comparing PCA on MFCC-60 vs.\ FFT magnitudes (513-D) with and without log compression. MFCCs rise steeply, indicating stronger low-rank structure; FFT variants require substantially higher rank to reach the same coverage.}
+  \label{fig:scree-mfcc-fft}
+\end{figure}
+
+\paragraph{MFCC illustration and example.}
+MFCCs summarize the short–time spectral envelope by projecting the log–mel spectrum onto cosine bases; first–order ($\Delta$) and second–order ($\Delta\Delta$) differences emphasize dynamics. Below, we show a MFCC matrix (columns are frames; rows are coefficients).
+
+\begin{figure}[!htbp]
+\centering
+\begin{subfigure}{0.8\linewidth}
+  \includegraphics[width=\linewidth]{../figures/mfcc_example.png}
+  \caption{MFCC (+ $\Delta$, $\Delta\Delta$)}
+\end{subfigure}
+\caption{Example features from a 10\,s engine clip (22.05\,kHz, \texttt{frame\_length=2048}, \texttt{hop\_length=512}). The MFCC panel stacks static coefficients with $\Delta$ and $\Delta\Delta$ (total \D=60).}
+\label{fig:mfcc_example}
+\end{figure}
+
 
 \section{Methods (Subspace Modeling \& Classification)}
 
-\textbf{Subspaces:} For each class, pool \textsc{train} frames across its \textsc{train} clips; fit PCA with uniform rank \rankr=5 (truncate if insufficient data). Scree and \EVR\ recorded per fold.
+\subsection*{Preprocessing and MFCC features}
+Let $y[n]$ be a mono signal at $f_s=\SI{22.05}{kHz}$. We compute short-time spectra with an STFT using window $w[n]$, length $N$ and hop $H$:
+\begin{equation}
+X[k,t] \;=\; \sum_{n=0}^{N-1} y[n+tH]\,w[n]\,e^{-j2\pi kn/N}, \qquad k=0,\dots,\lfloor N/2\rfloor.
+\end{equation}
+Let $|X[k,t]|^2$ denote power. A mel filterbank $F\!\in\!\mathbb{R}^{M\times K}$ ($K{=}\lfloor N/2\rfloor{+}1$) maps linear frequencies to $M$ mel bands:
+\begin{equation}
+S_{\mathrm{mel}}[m,t] \;=\; \sum_{k=0}^{K-1} F[m,k]\;|X[k,t]|^2,\quad m=0,\dots,M{-}1.
+\end{equation}
+We apply log compression (natural log) with small $\epsilon{>}0$ for numerical stability:
+\begin{equation}
+L[m,t] \;=\; \log \!\big(S_{\mathrm{mel}}[m,t]+\epsilon\big).
+\end{equation}
+MFCCs are the DCT-II of each log–mel vector (row-wise), keeping the first $C$ coefficients:
+\begin{equation}
+c_q[t] \;=\; \sum_{m=0}^{M-1} D_{q,m}\,\big(L[m,t]-\bar L[m]\big), \quad q=0,\dots,C{-}1,
+\end{equation}
+where $D$ is the DCT-II matrix and $\bar L[m]$ is an optional per-band mean (cepstral mean subtraction). We then append first- and second-order regressors (deltas) using window $W$:
+\begin{align}
+\Delta c_q[t] &= \frac{\sum_{i=1}^{W} i\,(c_q[t{+}i]-c_q[t{-}i])}{2\sum_{i=1}^{W} i^2}, \\
+\Delta^2 c_q[t] &= \frac{\sum_{i=1}^{W} i\,(\Delta c_q[t{+}i]-\Delta c_q[t{-}i])}{2\sum_{i=1}^{W} i^2}.
+\end{align}
+We form frame vectors $x_t \in \mathbb{R}^{\D}$ by stacking $C$ MFCCs with $\Delta$ and $\Delta\Delta$ ($\D=3C=60$). Per clip, we apply cepstral mean normalization (CMN): $x_t \leftarrow x_t - \frac{1}{T}\sum_{t=1}^{T} x_t$.
 
-\textbf{Stability:} For each class, $B=10$ bootstraps sampling \SI{70}{\percent} of \textsc{train} clips; refit PCA and compute the \emph{largest principal angle} (degrees) to the reference \textsc{train} subspace; summarize via median and IQR.
+\subsection*{Class-conditional PCA subspaces}
+For each class $c$, collect \textsc{train} frames $\{x_t\}_{t\in\mathcal{T}_c}$ from its \textsc{train} clips and center by the class mean
+$\mu_c=\frac{1}{|\mathcal{T}_c|}\sum_{t\in\mathcal{T}_c}x_t$. Form $X_c=[\,x_t-\mu_c\,] \in \mathbb{R}^{\D\times N_c}$ and compute its thin SVD
+\begin{equation}
+X_c \;=\; U_c\,\Sigma_c\,V_c^\top.
+\end{equation}
+The rank-$\rankr$ subspace basis is $U_c^{(\rankr)} = U_c[:,1\!:\!\rankr]$. The cumulative explained variance ratio (\EVR) at rank $k$ is
+\begin{equation}
+\mathrm{EVR}_c(k) \;=\; \frac{\sum_{i=1}^{k}\sigma_{c,i}^2}{\sum_{i=1}^{\min(\D,N_c)}\sigma_{c,i}^2}.
+\end{equation}
+Unless stated otherwise, we use a uniform $\rankr=5$ per class and log \EVR\ and scree curves per fold.
 
-\textbf{\NSC\ (calibrated):} For a test clip and each class, compute per-frame residuals to the class subspace, aggregate with a \emph{trimmed mean}: discard the upper $q=0.40$ fraction (largest residuals) when $K\ge 10$ frames are available; otherwise use the median. Then $z$-score calibrate by class using \textsc{train}; predict by minimum calibrated score.
+\subsection*{Between-class geometry: principal angles}
+Given two subspaces with orthonormal bases $U\in\mathbb{R}^{\D\times r}$ and $V\in\mathbb{R}^{\D\times r}$, the cosines of the principal angles
+$\{\theta_i\}_{i=1}^{r}$ are the singular values of $U^\top V$:
+\begin{equation}
+U^\top V \;=\; P\,\mathrm{diag}(\cos\theta_1,\dots,\cos\theta_r)\,Q^\top,\quad 0\le \theta_1\le\cdots\le \theta_r\le \tfrac{\pi}{2}.
+\end{equation}
+We report the \emph{largest} principal angle $\theta_{\max}=\theta_r$ as a summary separation (larger $\Rightarrow$ more separated).
 
-\textbf{Optional MSM:} \texttt{msm\_eval.py} present; evaluated but not superior, so \NSC\ is reported as primary.
+\subsection*{Stability via bootstrap}
+For each class $c$, we assess subspace stability by bootstrapping \textsc{train} \emph{clips}. In each of $B$ replicates, sample a fraction $p$ of the class’s \textsc{train} clips without replacement, refit PCA to get $\tilde U_c^{(\rankr)}$, and compute
+\begin{equation}
+\theta_{\max}^{(b)}(c) \;=\; \arccos\!\big(\sigma_{\min}\big(U_c^{(\rankr)\top}\tilde U_c^{(\rankr)}\big)\big),
+\end{equation}
+where $\sigma_{\min}(\cdot)$ is the smallest singular value. We summarize $\{\theta_{\max}^{(b)}(c)\}_{b=1}^{B}$ via median and IQR (and, when needed, bootstrap CIs).
 
-\noindent\textbf{Defaults:} \D=60, \rankr=5, $q=0.40$, $K=10$, $B=10$, bootstrap $p=0.70$, 5 folds, seeds CV=0 and numeric=42.
+\subsection*{Calibrated nearest-subspace classifier (\NSC)}
+For a test clip with frames $\{x_t\}_{t=1}^{K}$ and class $c$ with $(\mu_c,U_c^{(\rankr)})$, define the framewise squared residual
+\begin{equation}
+r_{c,t} \;=\; \big\|\big(I - U_c^{(\rankr)}U_c^{(\rankr)\top}\big)\big(x_t-\mu_c\big)\big\|_2^2.
+\end{equation}
+Aggregate over frames with an upper-tail trimmed mean (robust to outliers):
+\begin{equation}
+\tilde r_c \;=\; \mathrm{trimmean}\big(\{r_{c,t}\}_{t=1}^{K};\,q\big),
+\end{equation}
+which discards the largest $q$ fraction (we use $q=0.40$ when $K\ge 10$, otherwise the median). Because residual scales can differ by class, we apply per-class $z$-score calibration estimated on \textsc{train}:
+\begin{equation}
+z_c \;=\; \frac{\tilde r_c - m_c}{s_c},\qquad m_c=\mathbb{E}_{\textsc{train}}[\tilde r_c],\;\; s_c=\sqrt{\mathrm{Var}_{\textsc{train}}[\tilde r_c]}.
+\end{equation}
+Predict the label by minimum calibrated score: $\hat y=\arg\min_c z_c$.
+
+\subsection*{Inverting MFCCs to spectra (for interpretability)}
+Given a mean MFCC vector $\bar c$ (or a low-dimensional trajectory along principal directions), we reconstruct an approximate log–mel spectrum via the inverse DCT:
+\begin{equation}
+\widehat L \;=\; D^{-1}\bar c,
+\end{equation}
+then undo log compression: $\widehat S_{\mathrm{mel}}=\exp(\widehat L)-\epsilon$. To obtain a linear-frequency spectrum, use a nonnegative least-squares or pseudoinverse mapping of the filterbank:
+\begin{equation}
+\widehat P \;\approx\; F^{+}\,\widehat S_{\mathrm{mel}}, \qquad F^{+}=\arg\min_{G}\,\|FG-I\|_F.
+\end{equation}
+We visualize $\widehat S_{\mathrm{mel}}$ or $\widehat P$ (linear frequency). If a time-domain signal is desired, a phase-reconstruction algorithm (e.g., Griffin–Lim) can be applied to $\sqrt{\widehat P}$, but in this work we use inversion only for spectral visualization.
+
+\subsection*{Cross-validation and leakage control}
+We use 5-fold \textbf{StratifiedGroupKFold} with $y=\texttt{engine\_configuration}$ and \emph{groups} equal to the clip identifier, ensuring no frames from a test clip appear in train (no leakage). All preprocessing choices that can leak information (means, scales, calibration statistics) are fit on \textsc{train} within each fold and applied to \textsc{test}.
+
+\paragraph{Uncertainty \& significance.}
+For accuracy metrics (overall, macro) we report the mean and standard deviation across the 5 cross-validation folds. For subspace stability we use a clip-level subsampling bootstrap on the \textsc{train} set within each class: on each replicate we sample a fraction $p=0.70$ of training clips \emph{without replacement}, refit the class PCA, and measure the largest bootstrap self-angle; we summarize these angles by the median and interquartile range (IQR) over $B_{\text{boot}}=1000$ replicates. EVR and reconstruction metrics are likewise summarized by fold mean $\pm$ SD.
+
+For significance of accuracy, we run a \emph{one-sided} permutation test within each fold: shuffle the \textsc{test} labels by clip, recompute overall accuracy, and repeat $B_{\text{perm}}=10{,}000$ times. The per-fold $p$-value is
+\begin{equation}
+p_f=\frac{1+\#\{\hat{a}^{(b)}_f \ge a^{\mathrm{obs}}_f\}}{1+B_{\text{perm}}}\,,
+\end{equation}
+and we combine $\{p_f\}_{f=1}^5$ across folds via Fisher’s method,
+\[
+X^2=-2\sum_{f=1}^{5}\ln p_f \;\sim\; \chi^2_{10}.
+\]
+We additionally report a pooled permutation $p$ for the mean accuracy across folds by comparing the observed mean to the distribution of fold-wise permuted means.
+
+\bigskip
+\noindent\textbf{Defaults.} $\D=60$, $\rankr=5$, $q=0.40$, $K=10$, $B_{\text{boot}}=1000$, $p=0.70$, $B_{\text{perm}}=10{,}000$, 5 folds; seeds: CV=0, numeric=42.
 
 \section{Results}
 
 \subsection{Low-Dimensionality}
+\FloatBarrier
 
 \begin{table}[!htbp]
 \caption{EVR@5 (mean $\pm$ SD across folds).}
@@ -117,11 +250,11 @@ single-cylinder  & 47.2 & 11.8 & \textit{n/a} \\
 \toprule
 \textbf{Class} & \textbf{EVR@5 (mean $\pm$ SD)} \\
 \midrule
-V6               & \textbf{96.1\% $\pm$ 0.2\%} \\
-V8               & \textbf{95.4\% $\pm$ 0.4\%} \\
-inline-4         & \textbf{95.1\% $\pm$ 0.5\%} \\
-inline-6         & \textbf{94.7\% $\pm$ 0.4\%} \\
-single-cylinder  & \textbf{94.3\% $\pm$ 0.4\%} \\
+V6               & \textbf{94.3\% $\pm$ 0.2\%} \\
+V8               & \textbf{93.6\% $\pm$ 0.5\%} \\
+inline-4         & \textbf{93.4\% $\pm$ 0.6\%} \\
+inline-6         & \textbf{92.8\% $\pm$ 0.5\%} \\
+single-cylinder  & \textbf{92.3\% $\pm$ 0.4\%} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -129,30 +262,112 @@ single-cylinder  & \textbf{94.3\% $\pm$ 0.4\%} \\
 \begin{figure}[!htbp]
 \centering
 \begin{subfigure}{0.19\linewidth}
-  \includegraphics[width=\linewidth]{rep_scree_V6.png}
+  \includegraphics[width=\linewidth]{../Results/cv/engine_configuration/summary/figures/rep_scree_V6.png}
   \caption{V6}
 \end{subfigure}\hfill
 \begin{subfigure}{0.19\linewidth}
-  \includegraphics[width=\linewidth]{rep_scree_V8.png}
+  \includegraphics[width=\linewidth]{../Results/cv/engine_configuration/summary/figures/rep_scree_V8.png}
   \caption{V8}
 \end{subfigure}\hfill
 \begin{subfigure}{0.19\linewidth}
-  \includegraphics[width=\linewidth]{rep_scree_inline-4.png}
+  \includegraphics[width=\linewidth]{../Results/cv/engine_configuration/summary/figures/rep_scree_inline-4.png}
   \caption{inline-4}
 \end{subfigure}\hfill
 \begin{subfigure}{0.19\linewidth}
-  \includegraphics[width=\linewidth]{rep_scree_inline-6.png}
+  \includegraphics[width=\linewidth]{../Results/cv/engine_configuration/summary/figures/rep_scree_inline-6.png}
   \caption{inline-6}
 \end{subfigure}\hfill
 \begin{subfigure}{0.19\linewidth}
-  \includegraphics[width=\linewidth]{rep_scree_single-cylinder.png}
+  \includegraphics[width=\linewidth]{../Results/cv/engine_configuration/summary/figures/rep_scree_single-cylinder.png}
   \caption{single-cylinder}
 \end{subfigure}
 \caption{Representative scree plots (cumulative \EVR) with \rankr=5 marked. Fold chosen by median overall accuracy.}
 \label{fig:scree}
 \end{figure}
 
+% \paragraph{MFCC vs. FFT scree comparison.}
+% To contextualize our choice of representation, Figure~\ref{fig:scree-mfcc-fft} contrasts the cumulative explained variance (EVR) of class-conditional PCA fitted on MFCC features versus linear-frequency FFT magnitudes. The MFCC curve rises more steeply, indicating that a small rank captures most signal variance in the perceptually smoothed, log-mel-derived space. In contrast, raw FFT magnitudes allocate capacity to narrowband harmonics and noise-like detail, yielding a slower EVR growth and a higher effective rank for comparable coverage. This supports our use of MFCCs for compact subspace modeling in subsequent analyses.
+
+% \begin{figure}[t]
+%   \centering
+%   \includegraphics[width=\linewidth]{../Results/scree_mfcc_vs_fft.png}
+%   \caption{Cumulative explained variance (EVR) for PCA on MFCC features versus raw FFT magnitudes (per class, aggregated). MFCCs exhibit a steeper EVR curve, indicating greater low-rank compressibility than FFT magnitudes.}
+%   \label{fig:scree-mfcc-fft}
+% \end{figure}
+
+% If the image is not found under ../Results/, try ../Result/ or a different extension such as .pdf or .svg.
+% TODO: If missing, replace the filename or path accordingly.
+\subsection{Interpretability via Subspace-to-Spectrum Inversion}
+\FloatBarrier
+To make the learned subspaces \emph{audible} and visually interpretable, we invert class means and their principal directions from MFCC space back to spectra. Concretely, for each engine configuration we (i) take the class mean and top-$r$ PCA directions in MFCC space, (ii) synthesize log-mel spectra via the MFCC inverse pipeline (pseudo-inverting the mel filterbank as needed), and (iii) optionally render linear-frequency views. We then overlay the per-class \emph{mean} spectra to compare spectral envelopes across configurations.
+
+\textit{What is overlaid in Fig.~\ref{fig:inversion-plot}?}  
+Unless otherwise noted, the cross-class overlay uses the \emph{PCA-filtered mean} curve, i.e., frames are first projected onto the learned class subspace ($P = UU^\top$ around the class mean $\mu$ with top-$r$ PCs), then inverted to mel/STFT, and finally averaged (\texttt{--overlay\_curve pca\_filtered\_mean}). Curves are normalized at a reference bin of 200\,Hz (\texttt{--normalize refhz --ref\_hz 200}) to enable shape comparisons. For reference, we also compute two non-subspace baselines that we do \emph{not} call inversions: \emph{model mean} (invert the tiled class-mean MFCC once) and \emph{data mean} (average mel directly before mel$\rightarrow$STFT).
+
+Figure~\ref{fig:inversion-plot} shows the overlay of mean inversions. We also summarize simple descriptors computed on the inverted mean spectra: spectral centroid and band energies (50--200\,Hz, 200--800\,Hz, 0.8--3\,kHz). Using these, the centroids rank as
+Inline-4 $\approx 2.81$\,kHz
+$<$ Inline-6 $\approx 3.32$\,kHz
+$<$ V6 $\approx 3.34$\,kHz
+$<$ V8 $\approx 3.45$\,kHz
+$<$ Single\text{-}Cylinder $\approx 3.72$\,kHz.
+In the 0.8--3\,kHz band, Inline-4 and Inline-6 allocate the largest shares ($\approx 36.4\%$ and $35.4\%$), followed by V6 ($34.7\%$), V8 ($32.0\%$), and Single\text{-}Cylinder ($28.1\%$). Together these patterns indicate that inline configurations skew brighter in the mid--high band, while V-configurations are somewhat rounder; the single-cylinder mean carries comparatively more energy above 3\,kHz (raising its centroid) but a smaller share in 0.8--3\,kHz.
+
+The leading principal direction acts as a \emph{brightness axis}: moving along PC1 from ``minus'' to ``plus'' shifts the spectral centroid from roughly $0.6$--$1.2$\,kHz (PC1$-$) up to $3.7$--$6.0$\,kHz (PC1$+$), i.e., about $-2.1$ to $-2.9$\,kHz below the mean and $+0.7$ to $+2.3$\,kHz above the mean depending on class. Higher PCs tend to reallocate energy between lower and upper bands rather than uniformly brightening. Finally, the inverted model spectra track the empirical class-mean spectra closely in \emph{shape} (Pearson $r \in [0.96, 0.99]$), confirming that inversion preserves the dominant envelope structure even if absolute amplitude differs due to normalization.
+
+% --- Cross-class overlay (correct filename from your script) ---
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{../Results/inversion/engine_configuration/cross_class_overlay_pca_filtered_mean.png}
+  \caption{Subspace-to-spectrum inversion (engine configuration): cross-class overlay of \emph{PCA-filtered mean} spectra (project $\rightarrow$ invert $\rightarrow$ average), with reference-Hz normalization at 200\,Hz. Inline configurations concentrate slightly more energy in 0.8--3\,kHz, whereas V-configurations are rounder; single-cylinder shows the highest centroid due to stronger upper-band content.}
+  \label{fig:inversion-plot}
+\end{figure}
+
+% --- Per-class check: show why we use PCA-filtered mean (pick one representative class) ---
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{../Results/inversion/engine_configuration/V8/compare_inversion_bundle.png}
+  \caption{Per-class comparison (V8): \emph{data mean} (no PCA), \emph{model mean} (invert mean MFCC once), and \emph{PCA-filtered mean} (project $\rightarrow$ invert $\rightarrow$ average). The PCA-filtered mean better matches the envelope while suppressing out-of-subspace variance, motivating its use in the cross-class overlay.}
+  \label{fig:inversion-bundle-v8}
+\end{figure}
+
+% --- PC excursions: show what a subspace direction sounds like (pick one representative class) ---
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}{0.48\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{../Results/inversion/engine_configuration/inline-4/pc1_minus_spectrum_hz.png}\\[-0.4em]
+    \small PC1$-$ (Inline-4)
+  \end{minipage}\hfill
+  \begin{minipage}{0.48\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{../Results/inversion/engine_configuration/inline-4/pc1_plus_spectrum_hz.png}\\[-0.4em]
+    \small PC1$+$ (Inline-4)
+  \end{minipage}
+  \caption{Principal-direction excursions (Inline-4): PC1 behaves like a ``brightness'' control, shifting energy between low and high bands while preserving the overall envelope shape.}
+  \label{fig:pc1-excursions-inline4}
+\end{figure}
+
+
+
+% \subsection{Interpretability via Subspace-to-Spectrum Inversion}
+% \FloatBarrier
+% To visualize what the learned subspaces ``sound like,'' we map class-conditional subspaces back to a spectral domain and plot the implied spectral envelopes. Concretely, starting from each class mean and its leading PCA directions in MFCC space, we synthesize representative log-mel spectra via the MFCC inverse pipeline (or by pseudo-inverting the mel filterbank), and optionally render their linear-frequency views. This produces qualitative, human-interpretable spectra that highlight the frequency regions emphasized by each class.
+
+% Figure~\ref{fig:inversion-plot} shows an example inversion plot. We observe broad peaks aligned with low-order harmonic regions and differences in spectral concentration across classes. Classes whose waveforms contain more stable tonal content yield smoother envelopes, while those with more broadband or transient content exhibit flatter or more irregular shapes. These trends are consistent with the low-rank evidence: classes that compress well (steeper EVR) also display more coherent, structured envelopes under inversion.
+
+% \begin{figure}[htbp]
+%   \centering
+%   \includegraphics[width=\linewidth]{../Results/inversion/engine_configuration/overlay_mean_spectra.png}
+%   \caption{Subspace-to-spectrum inversion. We visualize class means and leading PCA directions mapped back to a spectral domain, revealing the frequency regions emphasized by each class. Broader, smoother peaks indicate more compact, coherent subspaces.}
+%   \label{fig:inversion-plot}
+% \end{figure}
+
+% If the file name differs, try patterns like ../Results/inversion.png, ../Results/inversion-plot.png, or ../Results/inversion.pdf.
+% TODO: Update the filename/path if needed.
+
+\FloatBarrier
 \subsection{Stability}
+\FloatBarrier
 
 \begin{table}[!htbp]
 \caption{Stability of class subspaces (largest principal angle, degrees).}
@@ -162,32 +377,37 @@ single-cylinder  & \textbf{94.3\% $\pm$ 0.4\%} \\
 \toprule
 \textbf{Class} & \textbf{Median} & \textbf{IQR (25--75\%)} \\
 \midrule
-V6               & \textbf{\ang{11.6}} & \ang{9.8}--\ang{16.0} \\
-V8               & \textbf{\ang{14.8}} & \ang{11.7}--\ang{22.2} \\
-inline-4         & \textbf{\ang{14.9}} & \ang{9.9}--\ang{32.5} \\
-inline-6         & \textbf{\ang{27.2}} & \ang{18.0}--\ang{52.6} \\
-single-cylinder  & \textbf{\ang{18.3}} & \ang{13.7}--\ang{22.7} \\
+V6               & \textbf{\ang{14.1}} & \ang{10.8}--\ang{18.7} \\
+V8               & \textbf{\ang{13.5}} & \ang{10.3}--\ang{18.2} \\
+inline-4         & \textbf{\ang{13.1}} & \ang{9.6}--\ang{18.9} \\
+inline-6         & \textbf{\ang{26.0}} & \ang{16.8}--\ang{41.6} \\
+single-cylinder  & \textbf{\ang{13.1}} & \ang{10.4}--\ang{17.1} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
+
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=\linewidth]{stability_violin.png}
+\includegraphics[width=0.8\linewidth]{../Results/cv/engine_configuration/summary/figures/stability_violin.png}
 \caption{Stability distributions (violin of bootstrapped largest angles in degrees). Lower medians and tighter IQRs indicate more stable subspaces.}
 \label{fig:stability}
 \end{figure}
 
+\FloatBarrier
 \subsection{Between-Class Geometry}
+\FloatBarrier
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=\linewidth]{rep_angles_heatmap.png}
-\caption{Between-class largest principal angles (degrees), representative (median-accuracy) fold. Closest pair: inline-4 vs.\ V8 (\ang{26.8}); most separated: V8 vs.\ inline-6 (\ang{87.1}).}
+\includegraphics[width=0.8\linewidth]{../Results/cv/engine_configuration/summary/figures/rep_angles_heatmap.png}
+\caption{Between-class largest principal angles (degrees), mean across folds. Closest pair: V8 vs.\ single-cylinder (\ang{25.3}); most separated: V6 vs.\ inline-4 (\ang{55.2}).}
 \label{fig:angles}
 \end{figure}
 
+\FloatBarrier
 \subsection{Discriminativeness (\NSC)}
+\FloatBarrier
 
 \begin{table}[!htbp]
 \caption{\NSC\ accuracy across folds. Chance baseline: $1/5=\SI{20}{\percent}$.}
@@ -197,13 +417,13 @@ single-cylinder  & \textbf{\ang{18.3}} & \ang{13.7}--\ang{22.7} \\
 \toprule
 \textbf{Fold} & \textbf{Overall} & \textbf{Macro} \\
 \midrule
-0 & \textbf{0.237} & \textbf{0.239} \\
-1 & \textbf{0.288} & \textbf{0.295} \\
-2 & \textbf{0.254} & \textbf{0.246} \\
-3 & \textbf{0.259} & \textbf{0.254} \\
-4 & \textbf{0.241} & \textbf{0.238} \\
+0 & \textbf{0.136} & \textbf{0.141} \\
+1 & \textbf{0.271} & \textbf{0.284} \\
+2 & \textbf{0.237} & \textbf{0.239} \\
+3 & \textbf{0.328} & \textbf{0.329} \\
+4 & \textbf{0.276} & \textbf{0.252} \\
 \midrule
-\textbf{mean $\pm$ SD} & \textbf{0.256 $\pm$ 0.020} & \textbf{0.255 $\pm$ 0.024} \\
+\textbf{mean $\pm$ SD} & \textbf{0.250 $\pm$ 0.071} & \textbf{0.249 $\pm$ 0.069} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -211,55 +431,80 @@ single-cylinder  & \textbf{\ang{18.3}} & \ang{13.7}--\ang{22.7} \\
 \begin{figure}[!htbp]
 \centering
 \begin{subfigure}{0.48\linewidth}
-  \includegraphics[width=\linewidth]{rep_confusion_norm.png}
+  \includegraphics[width=\linewidth]{../Results/cv/engine_configuration/summary/figures/rep_confusion_norm.png}
   \caption{Normalized}
 \end{subfigure}\hfill
 \begin{subfigure}{0.48\linewidth}
-  \includegraphics[width=\linewidth]{rep_confusion_raw.png}
+  \includegraphics[width=\linewidth]{../Results/cv/engine_configuration/summary/figures/rep_confusion_raw.png}
   \caption{Raw}
 \end{subfigure}
-\caption{Confusion matrices (representative fold selected by median overall accuracy). Confusions align with closest pairs in angle space (e.g., inline-4 $\leftrightarrow$ V8).}
+\caption{Confusion matrices aggregated across 5 folds (left: row-normalized; right: raw counts). Confusions align with closest pairs in angle space (e.g., V8 $\leftrightarrow$ single-cylinder).}
+
+% \caption{Confusion matrices (representative fold selected by median overall accuracy). Confusions align with closest pairs in angle space (e.g., V8 $\leftrightarrow$ single-cylinder).}
 \label{fig:confusion}
 \end{figure}
 
-\noindent\emph{Permutation test (representative fold):} observed overall $0.254$; permuted label accuracy $0.203 \pm 0.055$ over 200 runs; chance $0.200$. JSON: \path{../Results/cv/engine_configuration/summary/perm_test.json}.
-
-\section{Evaluation Depth: Baselines, Ablations, and Diagnostics}
-
-To contextualize the subspace results and probe their robustness, we specify a set of \emph{baselines}, \emph{ablations}, and \emph{diagnostics}. (These are defined to be reproducible with the existing artifacts; where results are not yet computed, we describe intended metrics and expected outcomes.)
-
-\subsection{Baseline Models}
-\begin{itemize}
-\item \textbf{Majority/Chance baselines:} Majority class (empirical) and uniform random (\SI{20}{\percent}) to anchor scale. \emph{Metric:} overall and macro accuracy; include 95\% CIs via bootstrap over clips.
-\item \textbf{Mean-pooled MFCC + Linear SVM:} Per clip: mean of 60-D frames $\rightarrow$ L2-normalize $\rightarrow$ Linear SVM ($C$ tuned by 5-fold inner CV on \textsc{train}). \emph{Expectation:} often $\gtrsim$ chance.
-\item \textbf{$k$NN on mean-pooled MFCC ($k\in\{1,5,11\}$):} Cosine distance; per-fold \textsc{train} as reference set. \emph{Expectation:} sensitive to class imbalance.
-\item \textbf{Class Centroid Residual (CCR):} Residual to class mean (no PCA) with the same trimmed aggregation \& calibration as \NSC. \emph{Expectation:} if \NSC $\gg$ CCR, low-rank structure matters.
-\end{itemize}
-
-\subsection{Ablations}
-\begin{itemize}
-\item \textbf{Rank sweep} \rankr~$\in\{2,5,10,15\}$: report \EVR@\rankr, \NSC\ accuracy@\rankr, and stability@\rankr\ (median $\theta_{\max}$).
-\item \textbf{\EVR-targeted rank selection:} choose smallest \rankr\ s.t.\ \EVR~$\ge \tau$ ($\tau\in\{90\%,95\%\}$); compare to fixed \rankr=5.
-\item \textbf{Aggregation robustness:} trims $q\in\{0.2,0.4,0.6\}$ and median; metrics: accuracy and within-clip residual variance.
-\item \textbf{Calibration on/off:} evaluate \NSC\ without per-class $z$-score calibration to quantify its effect.
-\end{itemize}
-
-\subsection{Diagnostics \& Error Analysis}
-\begin{itemize}
-\item \textbf{Geometry/confusion alignment:} correlate pairwise subspace angles with confusion rates across folds (Spearman $\rho$).
-\item \textbf{State-conditioning (exploratory):} re-fit subspaces on a single \texttt{engine\_state} (e.g., idle) to test if recording heterogeneity blurs geometry.
-\item \textbf{Recording condition sensitivity:} stratify by SNR/roomness (proxy via spectral flatness/noise floor) to check robustness.
-\end{itemize}
+\noindent\emph{Permutation tests (across folds).}
+Combining one-sided per-fold permutation $p$-values using Fisher's method (Eq.~16) yields $\chi^2_{10}=20.44$, $p=0.0253$, indicating accuracy above chance with a small effect.
+A pooled permutation on the mean accuracy across folds gives $p=0.0136$ (10{,}000 shuffles per fold; observed mean $0.2495$ vs.\ null mean $0.1990 \pm 0.0227$).
+JSON: \path{../Results/cv/engine_configuration/summary/perm_across_folds.json}.
+\FloatBarrier
 
 \section{Analysis \& Interpretation}
 
-\textbf{Low-dimensionality:} With \D=60, a uniform \rankr=5 ($\approx 8\%$ of \D) explains $\gtrsim \SI{94}{\percent}$ \EVR\ across classes; scree curves flatten rapidly.
+\textbf{Low-dimensionality.}  
+Across all configurations, a uniform subspace rank of $r=5$ (roughly $8\%$ of the $D=60$ feature dimension) captures between $\SI{92}{\percent}$ and $\SI{94}{\percent}$ cumulative explained variance (EVR), with negligible fold-to-fold variation ($\sigma_{\text{fold}} < 0.006$). Test-frame reconstruction errors remain moderate ($\approx 1.1$–$1.3\times10^3$), confirming that five principal components are sufficient to represent the bulk of class variability. This demonstrates that engine-configuration audio indeed lies on low-dimensional manifolds within the MFCC space, with a mild weakness for inline-6 which exhibits slightly higher residuals.
 
-\textbf{Stability:} Median largest angles are generally modest ($\approx$ \ang{12}--\ang{18}), indicating stable subspaces; inline-6 shows higher median and wider spread $\rightarrow$ weaker stability.
+\textbf{Interpretability via inversion.}
+Mean-spectrum inversions reveal physically sensible differences between configurations. The Inline-4 mean has the \emph{lowest} centroid ($\approx 2.81$\,kHz) and the \emph{highest} 0.8--3\,kHz share ($\approx 36.4\%$), consistent with a brighter mid--high emphasis, closely followed by Inline-6 ($\approx 3.32$\,kHz, $35.4\%$). V6 and V8 sit in the middle (centroids $\approx 3.34$ and $3.45$\,kHz; 0.8--3\,kHz shares $\approx 34.7\%$ and $32.0\%$), yielding rounder envelopes. Single\text{-}Cylinder exhibits the \emph{highest} centroid ($\approx 3.72$\,kHz) but the \emph{lowest} 0.8--3\,kHz share ($\approx 28.1\%$), indicating comparatively stronger content above 3\,kHz. Principal-direction inversions clarify the geometry: PC1 reliably controls spectral ``brightness,'' shifting centroids by roughly $-2.1$ to $-2.9$\,kHz (PC1$-$) or $+0.7$ to $+2.3$\,kHz (PC1$+$) relative to the mean. These trends align with expectations from source/cadence differences across engine families and demonstrate that the learned subspaces encode perceptually meaningful, class-specific envelopes rather than arbitrary variance.
 
-\textbf{Discriminativeness:} \NSC\ exceeds \SI{20}{\percent} chance (overall $25.6\% \pm 2.0\%$; macro $25.5\% \pm 2.4\%$). Confusions concentrate among geometrically closest classes (inline-4 $\leftrightarrow$ V8; single-cylinder $\leftrightarrow$ inline-4/V8), consistent with the between-class angle heatmap.
 
-\textbf{Interpretation:} Results support the hypothesis that engine-configuration audio exhibits a compact, partially separable structure. Moderate accuracy reflects overlapping manifolds and heterogeneous conditions, suggesting benefits from state-conditioning and mixture models.
+% \textbf{Interpretability via inversion.}  
+% Mean-spectral inversions reveal physically interpretable differences among configurations.  
+% The \emph{V8} subspace shows the lowest spectral centroid ($\approx \SI{780}{Hz}$) and steepest rolloff, consistent with a bass-heavy harmonic structure from its lower firing cadence.  
+% The \emph{single-cylinder} subspace exhibits the highest centroid ($\approx \SI{1100}{Hz}$) and flattest slope, reflecting a brighter, sharper tone.  
+% The \emph{V6} spectrum peaks in the mid–high band, while the \emph{inline-4} and \emph{inline-6} display similar envelopes ($\approx \SI{880}{Hz}$ centroids) with smoother, less distinctive profiles.  
+% Overall, these spectral tendencies align with acoustic intuition and show that the learned subspaces capture perceptually meaningful structure rather than arbitrary statistical variance.
+
+\textbf{Stability.}
+Bootstrap principal-angle analysis indicates consistent subspace recovery for four classes: V6 (\ang{14.1}, \ang{10.8}–\ang{18.7}), V8 (\ang{13.5}, \ang{10.3}–\ang{18.2}), inline-4 (\ang{13.1}, \ang{9.6}–\ang{18.9}), and single-cylinder (\ang{13.1}, \ang{10.4}–\ang{17.1}). 
+Inline-6 remains an outlier with a higher median (\ang{26.0}) and a much wider IQR (\ang{16.8}–\ang{41.6}), suggesting greater within-class heterogeneity (e.g., broader RPM range or recording variability). 
+Aside from inline-6, the relatively narrow IQRs support that the PCA subspaces are reasonably stable under bootstrap resampling.
+
+\textbf{Between-class geometry.}
+Pairwise subspace angles reveal a structured topology.
+The closest pair is V8--single-cylinder (about \ang{25}), with V8--inline-4 moderately close (about \ang{28}).
+Inline-6 sits farther from both (\ang{42}--\ang{44} to V8/inline-4), while V6 is the most distinct overall (\ang{37}--\ang{55} to others).
+This geometry aligns with the inversion patterns: classes with similar spectral envelopes produce smaller angles, whereas the more distinctive V6 envelope yields larger separations, indicating genuine acoustic relationships rather than random dispersion.
+
+\textbf{Discriminativeness.}
+The calibrated nearest-subspace classifier (\NSC) achieves overall accuracy of \SI{25.0 \pm 7.1}{\percent} (macro \SI{24.9 \pm 6.9}{\percent}), exceeding the \SI{20}{\percent} chance baseline. Combining one-sided per-fold permutation $p$-values via Fisher's method (Eq.~16) yields $\chi^2_{10}=20.44$, $p=0.0253$; a pooled permutation test on the mean accuracy across folds gives $p=0.0136$. 
+V8 and inline-4 exhibit the strongest recall, while V6 and inline-6 lag, consistent with their instability and geometric proximity to other classes. 
+These outcomes align with the subspace-angle structure: closer, less stable subspaces incur more confusions, whereas better-separated, stable subspaces yield higher recall.
+
+\textbf{Overall interpretation.}  
+Collectively, the results show that engine-configuration sounds inhabit low-dimensional, physically interpretable, and largely stable subspaces that preserve the perceptual hierarchy of engine types.  
+However, overlapping manifolds and within-class heterogeneity limit discriminative performance, suggesting that finer state-conditioning (e.g., by RPM or engine load) or class-adaptive ranks could further separate the configurations.  
+The analysis thus supports the hypothesis that audio from distinct engine architectures occupies compact but partially overlapping linear regions in MFCC space.
+
+\paragraph{Reproducibility.}
+All experiments use MFCC-20+$\Delta$+$\Delta\Delta$ ($D=60$) at \SI{22.05}{kHz}, frames $(2048,512)$. 
+Per-class PCA with uniform $r=5$ (chosen since EVR~$\gtrsim\SI{90}{\percent}$ by $k=5$ for all classes). 
+Stability via bootstrap principal angles ($B=1000$, $p=0.70$ of TRAIN clips), geometry via inter-class principal angles, and clip-level \textsc{NSC} with upper-tail trimming ($q=0.40$, $K\ge10$) and per-class $z$-calibration on TRAIN. 
+CV: StratifiedGroupKFold($n{=}5$), seeds $\texttt{cv}=0$, $\texttt{num}=42$. 
+Artifacts (tables/figures/audio) are under \path{../Results/...}.
+
+\paragraph{Synthesis.}
+Taken together, the evidence indicates that engine-configuration audio occupies compact, interpretable subspaces (PC1 $\approx$ “brightness,” PC2/PC3 $\approx$ spectral tilt/band emphasis). Inter-class geometry explains the limits of \textsc{NSC}: class pairs with small principal angles account for most confusions, whereas better-separated, more stable subspaces yield higher recall. Stability is strong for most classes; inline-6 is less stable, consistent with greater within-class heterogeneity. Overall discriminativeness is modest—\SI{25.0}{\percent}\,(7.1) vs.\ \SI{20}{\percent} chance—statistically above chance but a small practical lift. Practically, conditioning on operating state (e.g., RPM) and allowing modest class-adaptive ranks should widen angles and improve discrimination without sacrificing interpretability; the subspace view remains valuable for compact indexing and diagnostic insight, especially when paired with stronger discriminative models.
+
+% \paragraph{Synthesis.}
+% Together, the results show that engine-configuration audio occupies compact, interpretable subspaces (PC1 brightness; PC2/3 tilt/band focus). 
+% The between-class geometry explains the \textsc{NSC} limits: a tight cluster (V8/inline-4/inline-6) induces confusions, while V6 remains more separated. 
+% Stability is strong for most classes, with inline-6 less stable—consistent with higher within-class heterogeneity. 
+% Practically, conditioning by state/RPM and modest class-adaptive ranks should widen angles and improve discrimination without sacrificing interpretability.
+
+% \textbf{Synthesis.} Taken together, the results show that engine-configuration audio occupies compact, interpretable subspaces: a uniform rank $\rankr=5$ explains \SIrange{92}{94}{\percent} of variance; subspaces are reasonably stable; and inter-class geometry is only moderately separated (largest-angle medians $\approx$\ang{12}--\ang{15}, inline-6 weaker). Consistent with this geometry, a calibrated \NSC achieves \SI{25.0(7.1)}{\percent} vs.\ \SI{20}{\percent} chance—statistically above chance but a small practical lift. In short: subspace models are excellent for compact indexing and diagnostic interpretability (e.g., PC1 $\approx$ “brightness”), yet on their own are limited for fine-grained classification; they are best used as a geometric lens and retrieval layer to complement stronger discriminative models.
+
 
 \section{Limitations \& Future Work}
 
@@ -267,41 +512,81 @@ To contextualize the subspace results and probe their robustness, we specify a s
 
 \textbf{Next steps:} (i) Add baselines (SVM/$k$NN/CCR) and \rankr-sweep; report CIs. (ii) Explore state-conditioned subspaces and mixture-of-subspaces, and Mahalanobis-weighted residuals. (iii) Integrate simple SNR weighting in frame aggregation.
 
-\section{Reproducibility}
+% \section{Reproducibility}
 
-\textbf{Settings used (from code and artifacts):} \D=60 (MFCC-20 + $\Delta$ + $\Delta\Delta$), 22.05 kHz mono; frames \texttt{frame\_length=2048}, \texttt{hop\_length=512}. Subspace rank \rankr=5 (uniform). Stability: $B=10$ bootstraps, $p=0.70$ fraction of \textsc{train} clips. \NSC\ aggregation: upper-tail trim $q=0.40$, min $K=10$; $z$-score calibration per class on \textsc{train}; 5 CV folds; seeds CV=0, numeric=42.
+% \paragraph{Data \& preprocessing.}
+% All audio is resampled to \SI{22.05}{kHz} mono. Frames use \texttt{frame\_length=2048}, \texttt{hop\_length=512}. Features are MFCC-20 + $\Delta$ + $\Delta\Delta$ (total $D=60$) on a log–mel front-end with $N_{\text{mels}}=64$, $f_{\min}=\SI{20}{Hz}$, $f_{\max}= \tfrac{1}{2} \cdot \text{sr}$. Per-clip metadata includes filename and the target attribute (\texttt{engine\_configuration}). Only classes with sufficient clips are included for CV.
 
-\textbf{Environment (from imports):} Python with \texttt{numpy}, \texttt{pandas}, \texttt{scikit-learn}, \texttt{matplotlib}, \texttt{pyarrow}.
+% \paragraph{Modeling \& evaluation settings.}
+% Per-class PCA subspaces are fit on TRAIN frames with a uniform rank $r=5$ (selected because EVR reaches $\approx\SI{90}{\percent}$ by $k=5$ for all classes). Low-dimensionality is reported via classwise EVR@5 and held-out reconstruction MSE. Stability uses bootstrap principal angles: $B=1000$ resamples, each with $p=0.70$ fraction of TRAIN clips (grouped by filename). Between-class geometry uses principal angles between class subspaces (per fold). Discriminativeness uses a calibrated nearest-subspace classifier (\NSC) operating on clip-level evidence aggregated from frame residuals with upper-tail trimming ($q=0.40$), minimum $K\ge 10$ frames retained; per-class $z$-score calibration is learned on TRAIN. Cross-validation is StratifiedGroupKFold with $n_{\text{splits}}=5$, stratify by class, groups=filename. Seeds: \texttt{RANDOM\_SEED\_CV=0}, \texttt{RANDOM\_SEED\_NUM=42}.
 
-\textbf{Artifacts used:} Tables: \path{../Results/cv/engine_configuration/summary/table_A_lowdim.csv}, \path{table_B_nsc.csv}, \path{table_C_stability.csv}, \path{perm_test.json}. Figures: \path{rep_scree_*.png}, \path{rep_confusion_*.png}, \path{rep_angles_heatmap.png}; stability violin from \path{../Data/stability/violin_theta_max.png} (or copied into \path{Paper/figures/stability_violin.png}).
+% \paragraph{Environment.}
+% Python; core libraries: \texttt{numpy}, \texttt{pandas}, \texttt{scikit-learn}, \texttt{matplotlib}, \texttt{pyarrow}. All figures/tables in the paper are generated from the referenced artifacts.
+
+% \paragraph{Artifacts (relative to \texttt{Paper/}).}
+% \emph{Tables:} \path{../Results/cv/engine_configuration/summary/table_A_lowdim.csv},
+% \path{../Results/cv/engine_configuration/summary/table_B_nsc.csv},
+% \path{../Results/cv/engine_configuration/summary/table_C_stability.csv},
+% \path{../Results/cv/engine_configuration/summary/perm_test.json},
+% \path{../Results/variance_comparison.csv}.
+% \emph{Figures:} scree comparison \path{../Results/scree_mfcc_vs_fft.png};
+% representative class scree \path{../Results/cv/engine_configuration/summary/figures/rep_scree_*.png};
+% angle heatmap \path{../Results/cv/engine_configuration/summary/figures/rep_angles_heatmap.png};
+% confusions \path{../Results/cv/engine_configuration/fold_*/confusion_*.png};
+% (inversion) \path{../Results/inversion/engine_configuration/overlay_mean_spectra_db.png} and per-PC sweep plots/audio in \path{../Results/inversion/engine_configuration/*/pcX_\pm.*}.
+% If desired, a stability violin may be copied into \path{Paper/figures/stability_violin.png}.
+
+% \paragraph{How to rebuild.}
+% (1) Generate MFCC frames with \texttt{make\_mfcc\_frames.py}; (2) run \texttt{cv\_subspace\_pipeline.py} for the chosen attribute to write \texttt{Results/cv/...}; (3) run the inversion utility (part of the pipeline utilities) to produce \texttt{Results/inversion/...}; (4) compile the paper (paths above).
+
+% \section{Discussion}
+
+% \paragraph{Representation compactness (MFCC vs.\ FFT).}
+% Figure~\ref{fig:scree-mfcc-fft} shows MFCC+$\Delta$+$\Delta\Delta$ concentrates variance very rapidly (global EVR@5 $\approx 0.919$, classwise EVR@5 $\approx \SIrange{92}{94}{\percent}$), while FFT (mag or logmag) requires tens to hundreds of PCs for comparable coverage. This compactness not only reduces model rank but also improves downstream stability and interpretability.
+
+% \paragraph{Interpretable axes via inversion.}
+% The inversion study (Fig.~\ref{fig:inversion-plot}) demonstrates that leading PCs correspond to perceptually meaningful directions: PC1 modulates spectral brightness/centroid; PC2–PC3 adjust spectral tilt and band emphasis. The sign of a PC is class-dependent (e.g., the ``$+$'' direction brightens for some inline classes but darkens for V-types), yet the \emph{semantics} of each axis remain consistent across classes. Overlayed mean spectra reinforce physical intuition: V8 is bass-heavier (lower centroid, steeper roll-off), single-cylinder is brighter (higher centroid), V6 has stronger mid–high energy; inline-4/inline-6 are closer in envelope.
+
+% \paragraph{Stability and geometry inform discriminativeness.}
+% Bootstrap principal angles indicate tight subspace recovery for V6, V8, inline-4, and single-cylinder (median largest angles $\approx \ang{12}$–$\ang{16}$), with inline-6 an outlier (median $\approx \ang{28}$; wide IQR), suggesting intra-class heterogeneity. Between-class principal angles reveal clustered geometry: inline-4/inline-6/V8 are closer (angles in the mid-20s), whereas V6 is more separated (often $\ang{43}$–$\ang{53}$). These structures explain \NSC\ outcomes: accuracy is above chance (overall $\approx 0.25$ vs.\ baseline $0.20$; permutation gap $\sim$1.7$\sigma$), yet confusions persist among geometrically proximate classes.
+
+% \paragraph{Implications.}
+% The combination of (i) compact, interpretable subspaces and (ii) clustered inter-class geometry suggests two levers: (a) \emph{conditioning} (e.g., by RPM/state) to tighten unstable classes like inline-6 and widen angles; (b) \emph{scoring} beyond nearest-subspace (e.g., Mahalanobis-weighted residuals or discriminative scoring over subspace distances). Clip-level temporal aggregation with trimmed evidence already helps; stronger temporal models could further reduce cross-talk.
 
 \section*{Appendix}
 
-\subsection*{A. File Inventory (.py Modules)}
+\subsection*{A. File Inventory (Python modules)}
+\texttt{prepare\_data.py}: build balanced subsets; resample/trim; write \texttt{Data/} metadata and frames.\\
+\texttt{make\_mfcc\_frames.py}: compute MFCC-20+$\Delta$+$\Delta\Delta$ ($D=60$); write \texttt{Data/mfcc} and index parquet.\\
+\texttt{cv\_subspace\_pipeline.py}: 5-fold CV for low-dimensionality, stability, geometry, and \NSC; writes \texttt{Results/cv/...}.\\
+\texttt{nsc\_calibrated.py}: calibrated nearest-subspace with trimmed aggregation ($q=0.40$, $K\ge 10$).\\
+\texttt{nsc\_eval.py}: evaluation utilities (non-CV).\\
+\texttt{split\_pca\_per\_class.py}: per-class PCA and scree saves.\\
+\texttt{pairwise\_subspace\_angles.py}: principal-angle geometry utilities.\\
+\texttt{subspace\_stability\_bootstrap.py}: bootstrap stability analysis.\\
+% (Inversion produced via utilities within the pipeline; artifacts in \texttt{Results/inversion/...}.)
 
-\texttt{prepare\_data.py}: Build balanced per-class subset; resample/trim/normalize audio; select frames; write \texttt{Data/} metadata and frames. \\
-\texttt{make\_mfcc\_frames.py}: Compute MFCC-20+$\Delta$+$\Delta\Delta$ (\D=60) per clip on the frames grid; write \texttt{Data/mfcc} and index parquet. \\
-\texttt{cv\_subspace\_pipeline.py}: 5-fold CV pipeline for low-dimensionality, stability, and \NSC\ classification; writes \texttt{Results/cv/...} summary tables and figures. \\
-\texttt{nsc\_calibrated.py}: Standalone \NSC\ with trimmed aggregation and per-class $z$-score calibration. \\
-\texttt{nsc\_eval.py}: Evaluation utilities for \NSC\ (non-CV experiments). \\
-\texttt{split\_pca\_per\_class.py}: Per-class PCA fitting and scree saving (non-CV utility). \\
-\texttt{pairwise\_subspace\_angles.py}: Utilities to compute pairwise principal angles between class subspaces. \\
-\texttt{subspace\_stability\_bootstrap.py}: Bootstrap-based stability analysis (non-CV utility). \\
-\texttt{msm\_eval.py}: Prototype evaluation for MSM; not superior to \NSC\ in this study.
+\subsection*{B. Selected per-fold summaries}
+See \path{../Results/cv/engine_configuration/fold_*/reconstruction_mse.csv},
+\path{../Results/cv/engine_configuration/fold_*/stability_summary.csv},
+\path{../Results/cv/engine_configuration/fold_*/between_class_angles.csv},
+\path{../Results/cv/engine_configuration/fold_*/nsc_accuracy.json}.
 
-\subsection*{B. Per-fold Summaries (Selected)}
-See \path{../Results/cv/engine_configuration/fold_*/reconstruction_mse.csv}, \path{stability_summary.csv}, \path{between_class_angles.csv}, and \path{nsc_accuracy.json} for fold-specific details.
+\subsection*{C. Full confusion matrices per fold}
+See \path{../Results/cv/engine_configuration/fold_*/confusion_raw.png} and \path{../Results/cv/engine_configuration/fold_*/confusion_norm.png}.
 
-\subsection*{C. Full Confusion Matrices per Fold}
-See \path{../Results/cv/engine_configuration/fold_*/confusion_raw.png} and \path{confusion_norm.png}.
+\subsection*{D. Raw stability angle samples}
+See \path{../Results/cv/engine_configuration/fold_*/stability_raw.csv} for per-bootstrap samples.
 
-\subsection*{D. Raw Stability Angle Samples}
-See \path{../Results/cv/engine_configuration/fold_*/stability_raw.csv} for per-bootstrap angles.
+% \section*{Executive Summary}
+% \textbf{Low-dimensional.} With $r=5$ ($\approx 8\%$ of $D=60$), classes achieve $\approx \SIrange{92}{94}{\percent}$ EVR (overall $\approx 0.919$), and test reconstruction MSEs remain moderate; FFT features require tens–hundreds of PCs for comparable EVR.\\
+% \textbf{Interpretable.} Inversions show PC1 $\leftrightarrow$ brightness/centroid, PC2–PC3 $\leftrightarrow$ tilt/band emphasis; mean spectra align with physical expectations (V8 bass-heavier, single-cylinder brighter, V6 more mid–high).\\
+% \textbf{Stable (mostly).} Bootstrap largest-angle medians are $\ang{12}$–$\ang{16}$ for most classes; inline-6 is markedly less stable (median $\approx \ang{28}$; wide IQR).\\
+% \textbf{Structured geometry.} Inline-4/inline-6/V8 form a closer cluster (angles mid-20s), while V6 is more separated ($\ang{43}$–$\ang{53}$).\\
+% \textbf{Discriminative.} Calibrated \NSC\ achieves $\sim 0.25$ overall vs.\ $0.20$ chance, supported by permutation tests ($\sim$1.7$\sigma$ above permuted mean); confusions track the closest subspace pairs.\\
+% \textbf{Actionable next steps.} Condition by state/RPM to reduce heterogeneity (esp.\ inline-6), consider class-adaptive ranks, use residual-distance features in a discriminative model, and strengthen temporal aggregation.
 
-\section*{Executive Summary}
-\textbf{Low-dimensional:} \rankr=5 of \D=60 explains $\approx$ \SIrange{94}{96}{\percent} \EVR\ across classes. \textbf{Stable:} medians $\approx$ \ang{12}--\ang{18} for most classes (inline-6 weaker). \textbf{Discriminative:} \NSC\ $25.6\% \pm 2.0\%$ overall vs.\ \SI{20}{\percent} chance; main confusions align with closest pairs (inline-4 $\leftrightarrow$ V8; single-cylinder $\leftrightarrow$ inline-4/V8).
-
-\section*{Minor Technical Consistency (Edits Applied)}
-Rounding harmonized: fold accuracies to three significant figures; \EVR\ to 0.1\% where appropriate. Units standardized: principal angles in degrees; ranks as \rankr. Clarified \emph{trimmed aggregation}: upper-tail trimming ($q=0.40$) of residuals with $K\ge 10$; otherwise median. Consistent notation for \D=60, \rankr=5, $B=10$, $q=0.40$, $K=10$ throughout.
+% \section*{Minor Technical Consistency (Edits Applied)}
+% Notation/units harmonized: EVR reported to $0.1\%$ where space permits; principal angles in degrees; ranks as $r$; seeds and CV parameters stated once and reused. Trimmed aggregation clarified as upper-tail trimming ($q=0.40$) with $K\ge 10$ frames; otherwise median. Figure references: scree (Fig.~\ref{fig:scree-mfcc-fft}); inversion (Fig.~\ref{fig:inversion-plot}); geometry heatmap and confusions in \path{../Results/cv/engine_configuration/summary/figures/}.
 
 \end{document}
