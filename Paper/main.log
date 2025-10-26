@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.8.31)  26 OCT 2025 14:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.8.31)  26 OCT 2025 15:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -416,7 +416,7 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 149.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/graphics/mathcolor.ltx))
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 48.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 50.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
@@ -426,24 +426,24 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 48.
-LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -501,66 +501,66 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Info: Redefining \microtypecontext on input line 48.
-Package microtype Info: Applying patch `item' on input line 48.
-Package microtype Info: Applying patch `toc' on input line 48.
-Package microtype Info: Applying patch `eqnum' on input line 48.
-Package microtype Info: Applying patch `footnote' on input line 48.
-Package microtype Info: Applying patch `verbatim' on input line 48.
-LaTeX Info: Redefining \microtypesetup on input line 48.
+LaTeX Info: Redefining \microtypecontext on input line 50.
+Package microtype Info: Applying patch `item' on input line 50.
+Package microtype Info: Applying patch `toc' on input line 50.
+Package microtype Info: Applying patch `eqnum' on input line 50.
+Package microtype Info: Applying patch `footnote' on input line 50.
+Package microtype Info: Applying patch `verbatim' on input line 50.
+LaTeX Info: Redefining \microtypesetup on input line 50.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 48.
+LaTeX Info: Redefining \showhyphens on input line 50.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
 )
-Package hyperref Info: Link coloring OFF on input line 48.
+Package hyperref Info: Link coloring OFF on input line 50.
  (./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 50.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 52.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 50.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 52.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 50.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 52.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 50.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 52.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 50.
+(Font)              <12> on input line 52.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 50.
+(Font)              <8> on input line 52.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 50.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 50.
+(Font)              <6> on input line 52.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 52.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 50.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 52.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/local/texlive/2025basic/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 52.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 54.
  (/usr/local/texlive/2025basic/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -569,25 +569,25 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 52.
+(Font)              <10> on input line 54.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 52.
+(Font)              <7> on input line 54.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 52.
+(Font)              <5> on input line 54.
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/10'.
 (microtype)             Ignoring protrusion settings for this character.
 
-Overfull \hbox (12.31319pt too wide) in paragraph at lines 52--53
+Overfull \hbox (12.31319pt too wide) in paragraph at lines 54--55
 \T1/lmr/m/n/10 (-20) mod-er-ately dis-crim-i-na-tive lin-ear sub-spaces. Us-ing 5-fold cross-validation on \T1/lmtt/m/n/10 engine_configuration\T1/lmr/m/n/10 (-20) ,
  []
 
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 54.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 56.
 (/usr/local/texlive/2025basic/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 66.
+(Font)              <10.95> on input line 68.
 
 
 [1
@@ -597,24 +597,24 @@ Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
 
-Overfull \hbox (51.58644pt too wide) in paragraph at lines 78--79
+Overfull \hbox (51.58644pt too wide) in paragraph at lines 80--81
 \T1/lmr/m/it/10.95 (-20) Code ref-er-ences: \T1/lmtt/m/n/10.95 prepare_data.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 make_mfcc_frames.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 cv_subspace_pipeline.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 nsc_calibrated.py\T1/lmr/m/n/10.95 (-20) . 
  []
 
 
-Overfull \hbox (19.69516pt too wide) in paragraph at lines 101--102
+Overfull \hbox (19.69516pt too wide) in paragraph at lines 103--104
 \T1/lmr/m/it/10.95 (-20) Artifacts: $\T1/lmtt/m/n/10.95 . . /Results / cv / engine _ configuration / fold _ * / coverage . json$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv / engine _
  []
 
 
-Overfull \hbox (14.77194pt too wide) in paragraph at lines 101--102
+Overfull \hbox (14.77194pt too wide) in paragraph at lines 103--104
 \T1/lmtt/m/n/10.95 configuration / summary / table _ A _ lowdim . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / summary / frames _ per _ clip _ by _ class .
  []
 
 <../Results/scree_mfcc_vs_fft.png, id=70, 578.16pt x 361.35pt>
 File: ../Results/scree_mfcc_vs_fft.png Graphic file (type png)
 <use ../Results/scree_mfcc_vs_fft.png>
-Package pdftex.def Info: ../Results/scree_mfcc_vs_fft.png  used on input line 123.
+Package pdftex.def Info: ../Results/scree_mfcc_vs_fft.png  used on input line 125.
 (pdftex.def)             Requested size: 469.75502pt x 293.59616pt.
 
 
@@ -624,10 +624,10 @@ Package pdftex.def Info: ../Results/scree_mfcc_vs_fft.png  used on input line 12
 <../figures/mfcc_example.png, id=85, 722.7pt x 289.08pt>
 File: ../figures/mfcc_example.png Graphic file (type png)
 <use ../figures/mfcc_example.png>
-Package pdftex.def Info: ../figures/mfcc_example.png  used on input line 134.
+Package pdftex.def Info: ../figures/mfcc_example.png  used on input line 136.
 (pdftex.def)             Requested size: 375.80544pt x 150.32245pt.
 
-Underfull \hbox (badness 2961) in paragraph at lines 137--137
+Underfull \hbox (badness 2961) in paragraph at lines 139--139
 []\T1/lmr/m/n/10.95 (+20) Figure 2: |Ex-am-ple fea-tures from a 10s en-gine clip (22.05kHz, \T1/lmtt/m/n/10.95 frame_length=2048\T1/lmr/m/n/10.95 (+20) ,
  []
 
@@ -641,27 +641,27 @@ Underfull \hbox (badness 2961) in paragraph at lines 137--137
 <../Results/cv/engine_configuration/summary/figures/rep_scree_V6.png, id=131, 433.62pt x 289.08pt>
 File: ../Results/cv/engine_configuration/summary/figures/rep_scree_V6.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/rep_scree_V6.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_scree_V6.png  used on input line 265.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_scree_V6.png  used on input line 267.
 (pdftex.def)             Requested size: 89.2546pt x 59.49997pt.
 <../Results/cv/engine_configuration/summary/figures/rep_scree_V8.png, id=132, 433.62pt x 289.08pt>
 File: ../Results/cv/engine_configuration/summary/figures/rep_scree_V8.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/rep_scree_V8.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_scree_V8.png  used on input line 269.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_scree_V8.png  used on input line 271.
 (pdftex.def)             Requested size: 89.2546pt x 59.49997pt.
 <../Results/cv/engine_configuration/summary/figures/rep_scree_inline-4.png, id=133, 433.62pt x 289.08pt>
 File: ../Results/cv/engine_configuration/summary/figures/rep_scree_inline-4.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/rep_scree_inline-4.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_scree_inline-4.png  used on input line 273.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_scree_inline-4.png  used on input line 275.
 (pdftex.def)             Requested size: 89.2546pt x 59.49997pt.
 <../Results/cv/engine_configuration/summary/figures/rep_scree_inline-6.png, id=134, 433.62pt x 289.08pt>
 File: ../Results/cv/engine_configuration/summary/figures/rep_scree_inline-6.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/rep_scree_inline-6.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_scree_inline-6.png  used on input line 277.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_scree_inline-6.png  used on input line 279.
 (pdftex.def)             Requested size: 89.2546pt x 59.49997pt.
 <../Results/cv/engine_configuration/summary/figures/rep_scree_single-cylinder.png, id=135, 433.62pt x 289.08pt>
 File: ../Results/cv/engine_configuration/summary/figures/rep_scree_single-cylinder.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/rep_scree_single-cylinder.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_scree_single-cylinder.png  used on input line 281.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_scree_single-cylinder.png  used on input line 283.
 (pdftex.def)             Requested size: 89.2546pt x 59.49997pt.
 
 
@@ -669,22 +669,22 @@ Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_
 <../Results/inversion/engine_configuration/cross_class_overlay_pca_filtered_mean.png, id=151, 650.43pt x 289.08pt>
 File: ../Results/inversion/engine_configuration/cross_class_overlay_pca_filtered_mean.png Graphic file (type png)
 <use ../Results/inversion/engine_configuration/cross_class_overlay_pca_filtered_mean.png>
-Package pdftex.def Info: ../Results/inversion/engine_configuration/cross_class_overlay_pca_filtered_mean.png  used on input line 320.
+Package pdftex.def Info: ../Results/inversion/engine_configuration/cross_class_overlay_pca_filtered_mean.png  used on input line 322.
 (pdftex.def)             Requested size: 469.75502pt x 208.78584pt.
 <../Results/inversion/engine_configuration/V8/compare_inversion_bundle.png, id=152, 578.16pt x 289.08pt>
 File: ../Results/inversion/engine_configuration/V8/compare_inversion_bundle.png Graphic file (type png)
 <use ../Results/inversion/engine_configuration/V8/compare_inversion_bundle.png>
-Package pdftex.def Info: ../Results/inversion/engine_configuration/V8/compare_inversion_bundle.png  used on input line 328.
+Package pdftex.def Info: ../Results/inversion/engine_configuration/V8/compare_inversion_bundle.png  used on input line 330.
 (pdftex.def)             Requested size: 469.75502pt x 234.8769pt.
 <../Results/inversion/engine_configuration/inline-4/pc1_minus_spectrum_hz.png, id=153, 505.89pt x 216.81pt>
 File: ../Results/inversion/engine_configuration/inline-4/pc1_minus_spectrum_hz.png Graphic file (type png)
 <use ../Results/inversion/engine_configuration/inline-4/pc1_minus_spectrum_hz.png>
-Package pdftex.def Info: ../Results/inversion/engine_configuration/inline-4/pc1_minus_spectrum_hz.png  used on input line 338.
+Package pdftex.def Info: ../Results/inversion/engine_configuration/inline-4/pc1_minus_spectrum_hz.png  used on input line 340.
 (pdftex.def)             Requested size: 225.4804pt x 96.63397pt.
 <../Results/inversion/engine_configuration/inline-4/pc1_plus_spectrum_hz.png, id=154, 505.89pt x 216.81pt>
 File: ../Results/inversion/engine_configuration/inline-4/pc1_plus_spectrum_hz.png Graphic file (type png)
 <use ../Results/inversion/engine_configuration/inline-4/pc1_plus_spectrum_hz.png>
-Package pdftex.def Info: ../Results/inversion/engine_configuration/inline-4/pc1_plus_spectrum_hz.png  used on input line 343.
+Package pdftex.def Info: ../Results/inversion/engine_configuration/inline-4/pc1_plus_spectrum_hz.png  used on input line 345.
 (pdftex.def)             Requested size: 225.4804pt x 96.63397pt.
 
 
@@ -694,7 +694,7 @@ Package pdftex.def Info: ../Results/inversion/engine_configuration/inline-4/pc1_
 <../Results/cv/engine_configuration/summary/figures/stability_violin.png, id=167, 433.62pt x 361.35pt>
 File: ../Results/cv/engine_configuration/summary/figures/stability_violin.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/stability_violin.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/stability_violin.png  used on input line 392.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/stability_violin.png  used on input line 394.
 (pdftex.def)             Requested size: 375.80544pt x 313.18651pt.
 
 
@@ -704,17 +704,17 @@ Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/stab
 <../Results/cv/engine_configuration/summary/figures/rep_angles_heatmap.png, id=184, 433.62pt x 361.35pt>
 File: ../Results/cv/engine_configuration/summary/figures/rep_angles_heatmap.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/rep_angles_heatmap.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_angles_heatmap.png  used on input line 403.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_angles_heatmap.png  used on input line 405.
 (pdftex.def)             Requested size: 375.80544pt x 313.18651pt.
 <../Results/cv/engine_configuration/summary/figures/rep_confusion_norm.png, id=185, 433.62pt x 361.35pt>
 File: ../Results/cv/engine_configuration/summary/figures/rep_confusion_norm.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/rep_confusion_norm.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_confusion_norm.png  used on input line 434.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_confusion_norm.png  used on input line 436.
 (pdftex.def)             Requested size: 225.4804pt x 187.90308pt.
 <../Results/cv/engine_configuration/summary/figures/rep_confusion_raw.png, id=186, 433.62pt x 361.35pt>
 File: ../Results/cv/engine_configuration/summary/figures/rep_confusion_raw.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/rep_confusion_raw.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_confusion_raw.png  used on input line 438.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_confusion_raw.png  used on input line 440.
 (pdftex.def)             Requested size: 225.4804pt x 187.90308pt.
 
 
@@ -723,27 +723,27 @@ Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_
 [13 <../Results/cv/engine_configuration/summary/figures/rep_confusion_norm.png> <../Results/cv/engine_configuration/summary/figures/rep_confusion_raw.png>]
 
 [14]
-Overfull \hbox (6.0892pt too wide) in paragraph at lines 491--496
+Overfull \hbox (6.0892pt too wide) in paragraph at lines 493--498
  []\T1/lmr/bx/n/10.95 (-20) Reproducibility.[] \T1/lmr/m/n/10.95 (-20) All ex-per-i-ments use MFCC-20+$\OT1/lmr/m/n/10.95 (-20) ^^A$\T1/lmr/m/n/10.95 (-20) +$\OT1/lmr/m/n/10.95 (-20) ^^A^^A$ \T1/lmr/m/n/10.95 (-20) ($\OML/lmm/m/it/10.95 D \OT1/lmr/m/n/10.95 (-20) = 60$\T1/lmr/m/n/10.95 (-20) ) at [][], frames $\OT1/lmr/m/n/10.95 (-20) (2048\OML/lmm/m/it/10.95 ; \OT1/lmr/m/n/10.95 (-20) 512)$\T1/lmr/m/n/10.95 (-20) .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 559--568
+Underfull \hbox (badness 10000) in paragraph at lines 561--570
 
  []
 
 
-Overfull \hbox (1.08763pt too wide) in paragraph at lines 570--574
+Overfull \hbox (1.08763pt too wide) in paragraph at lines 572--576
 \T1/lmr/m/n/10.95 (-20) See $\T1/lmtt/m/n/10.95 . . /Results / cv / engine _ configuration / fold _ * / reconstruction _ mse . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv /
  []
 
 
-Overfull \hbox (17.64632pt too wide) in paragraph at lines 570--574
+Overfull \hbox (17.64632pt too wide) in paragraph at lines 572--576
 \T1/lmtt/m/n/10.95 engine _ configuration / fold _ * / stability _ summary . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv / engine _ configuration /
  []
 
 
-Overfull \hbox (26.26941pt too wide) in paragraph at lines 570--574
+Overfull \hbox (26.26941pt too wide) in paragraph at lines 572--576
 \T1/lmtt/m/n/10.95 fold _ * / between _ class _ angles . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv / engine _ configuration / fold _ * / nsc _ accuracy .
  []
 
@@ -760,15 +760,15 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 0AB83F04C7C5720363C5C47D2B8FA8D7;2068.
  ) 
 Here is how much of TeX's memory you used:
- 17776 strings out of 474662
- 336795 string characters out of 5751109
- 726414 words of memory out of 5000000
- 40257 multiletter control sequences out of 15000+600000
- 650697 words of font info for 226 fonts, out of 8000000 for 9000
+ 17783 strings out of 474662
+ 336870 string characters out of 5751109
+ 726413 words of memory out of 5000000
+ 40258 multiletter control sequences out of 15000+600000
+ 650946 words of font info for 229 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  75i,9n,79p,1212b,1045s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (16 pages, 3048312 bytes).
+Output written on main.pdf (16 pages, 3048256 bytes).
 PDF statistics:
  331 PDF objects out of 1000 (max. 8388607)
  240 compressed objects within 3 object streams
