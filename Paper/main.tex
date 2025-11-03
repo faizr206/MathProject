@@ -43,7 +43,8 @@
 \newcommand{\NSC}{NSC\xspace}
 
 % --- Title ---
-\title{Low-Dimensional, Stable, and Moderately Discriminative Subspaces for Engine Sound Attributes}
+% \title{Low-Dimensional, Stable, and Moderately Discriminative Subspaces for Engine Sound Attributes}
+\title{Under the Hood: Low-Dimensional, Stable Subspaces for Engine Sound Attributes}
 \author{Faiz Rizki Ramadhan \\ \small math project}
 \date{}
 
@@ -53,7 +54,7 @@
 \begin{abstract}
 We ask whether engine sounds sharing a fixed attribute live in low-dimensional, stable, and moderately discriminative linear subspaces. Using 5-fold cross-validation on \texttt{engine\_configuration}, we extract MFCC features (20 + $\Delta$ + $\Delta\Delta$, so $\D=60$), fit class-conditional PCA subspaces with a uniform rank $\rankr=5$ on \textsc{train} frames, quantify stability via bootstrapped principal angles, and evaluate discriminativeness with a calibrated nearest-subspace classifier (\NSC) using trimmed aggregation ($q=0.40$, $K\!\ge\!10$).
 
-At $\rankr=5$, cumulative explained variance is \SIrange{92}{94}{\percent} across classes, supporting a low-rank structure. Bootstrapped self-angles are modest (medians $\approx$\ang{13}--\ang{15}; inline-6 weaker), indicating subspace stability; between-class largest principal angles range $\approx$\ang{25}--\ang{55}, indicating partial overlap. \NSC attains \SI{25.0 \pm 7.1}{\percent} accuracy versus a \SI{20}{\percent} chance baseline; a one-sided permutation test combined across folds via Fisher's method (Eq.~16) yields $\chi^2_{10}=20.44$, $p=0.0253$, confirming a statistically significant but practically small lift. Misclassifications track geometry: the closest class pairs in angle space account for most errors.
+At $\rankr=5$, cumulative explained variance is \SIrange{92}{94}{\percent} across classes, supporting a low-rank structure. Bootstrapped self-angles are modest (medians $\approx$\ang{13}--\ang{15}; inline-6 weaker), indicating subspace stability; between-class largest principal angles range $\approx$\ang{25}--\ang{55}, indicating partial overlap. \NSC (Nearest Subspace Classifier) attains \SI{25.0 \pm 7.1}{\percent} accuracy versus a \SI{20}{\percent} chance baseline; a one-sided permutation test combined across folds via Fisher's method (Eq.~16) yields $\chi^2_{10}=20.44$, $p=0.0253$, confirming a statistically significant but practically small lift. Misclassifications track geometry: the closest class pairs in angle space account for most errors.
 
 \textbf{Implication.} Low-rank, reasonably stable subspaces enable compact indexing, robust similarity search, and interpretable diagnostics for engine-audio analytics, while the modest lift cautions against using subspaces alone for fine-grained classification.
 \end{abstract}

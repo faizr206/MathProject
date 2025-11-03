@@ -394,6 +394,39 @@ def process_class(class_name: str,
                           title=f"Model inversion: median spectrum (PC{j+1} {tag})")
             sf.write(os.path.join(out_dir, f"{base}.wav"), y_j, sr)
 
+    # ---- Build PC1 sweep CSV for Manim slider (alphas: -2,-1,0,1,2) ----
+    # Requires: freqs (from plot_spectrum), mu, U, lambdas, k_sigma, etc. already defined above.
+    alpha_grid = np.array([-2.0, -1.0, 0.0, 1.0, 2.0], dtype=float)
+    if r >= 1:
+        u1 = U[:, 0]
+        sigma1 = float(np.sqrt(max(lambdas[0], 0.0)))
+        specs = []
+        for a in alpha_grid:
+            mu_a = mu + (a * k_sigma * sigma1) * u1  # use local k_sigma
+            frames = tile_static_mfcc(mu_a, t_seconds, hop_length, sr)
+            _, _, S_a = mfcc_frames_to_audio(frames, sr=sr,
+                                             n_mels=n_mels, n_fft=n_fft,
+                                             hop_length=hop_length, gl_iters=gl_iters)
+            spec_a = np.median(S_a, axis=1)  # (F,)
+            specs.append(spec_a)
+        specs = np.stack(specs, axis=0)  # (K, F)
+
+        # Normalize each curve at the REF_HZ bin so shapes are comparable
+        def _nearest_idx(arr, v):
+            return int(np.argmin(np.abs(arr - v)))
+        idx_ref = _nearest_idx(freqs, REF_HZ)
+        ref_vals = np.maximum(specs[:, [idx_ref]], 1e-12)
+        specs_norm = specs / ref_vals
+
+        # Write CSV with columns: freq_hz, alpha_-2, alpha_-1, alpha_0, alpha_1, alpha_2
+        out_csv = os.path.join(out_dir, "pc1_sweep.csv")
+        wide = pd.DataFrame({"freq_hz": freqs})
+        for a, spec in zip(alpha_grid, specs_norm):
+            key = f"alpha_{int(a):d}" if float(a).is_integer() else f"alpha_{a:.1f}"
+            wide[key] = spec
+        wide.to_csv(out_csv, index=False)
+
+
 # ---------------------- Cross-class overlays ----------------------
 def _nearest_idx(freqs: np.ndarray, ref_hz: float) -> int:
     return int(np.argmin(np.abs(freqs - ref_hz)))
