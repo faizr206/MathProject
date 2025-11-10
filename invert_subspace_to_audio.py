@@ -70,6 +70,17 @@ def canonicalize(name: str) -> str:
 def info(msg: str):
     print(f"[invert] {msg}")
 
+def _annotate_axes_with_class(ax, class_label: Optional[str]):
+    if not class_label:
+        return
+    # small, unobtrusive stamp in the top-left corner
+    ax.text(
+        0.01, 0.98, str(class_label),
+        transform=ax.transAxes, ha="left", va="top",
+        fontsize=9, alpha=0.8,
+        bbox=dict(boxstyle="round,pad=0.25", facecolor="white", edgecolor="0.8", alpha=0.8)
+    )
+
 # ---------------------- FrameSource ----------------------
 class FrameSource:
     """
@@ -156,39 +167,49 @@ def mfcc_frames_to_audio(mfcc_frames: np.ndarray,
     y = librosa.griffinlim(S_mag, n_iter=gl_iters, hop_length=hop_length, win_length=WIN_LENGTH)
     return y, mel, S_mag
 
-def save_spectrum_plot(freqs: np.ndarray, spec: np.ndarray, out_path: str, title: str):
+def save_spectrum_plot(freqs: np.ndarray, spec: np.ndarray, out_path: str, title: str,
+                       class_label: Optional[str] = None):
     plt.figure(figsize=(7,3))
-    plt.plot(freqs, spec)
-    plt.xlabel("Frequency (Hz)")
-    plt.ylabel("Magnitude (a.u.)")
-    plt.title(title)
+    ax = plt.gca()
+    ax.plot(freqs, spec)
+    ax.set_xlabel("Frequency (Hz)")
+    ax.set_ylabel("Magnitude (a.u.)")
+    ax.set_title(title)
+    _annotate_axes_with_class(ax, class_label)
     plt.tight_layout()
     plt.savefig(out_path, dpi=150)
     plt.close()
 
-def plot_mel(mel: np.ndarray, sr: int, hop_length: int, out_path: str, fmin: float, fmax: float):
-    plt.figure(figsize=(7, 3))
-    librosa.display.specshow(librosa.power_to_db(mel, ref=np.max),
-                             sr=sr, hop_length=hop_length,
-                             x_axis='time', y_axis='mel', fmin=fmin, fmax=fmax)
+def plot_mel(mel: np.ndarray, sr: int, hop_length: int, out_path: str,
+             fmin: float, fmax: float, class_label: Optional[str] = None):
+    plt.figure(figsize=(7,3))
+    ax = plt.gca()
+    librosa.display.specshow(
+        librosa.power_to_db(mel, ref=np.max),
+        sr=sr, hop_length=hop_length,
+        x_axis='time', y_axis='mel', fmin=fmin, fmax=fmax
+    )
     plt.colorbar(format="%+2.0f dB")
-    plt.title("Mel spectrogram (dB)")
-    plt.xlabel("Time (s)")
-    plt.ylabel("Mel frequency (mel)")
+    ax.set_title("Mel spectrogram (dB)")
+    ax.set_xlabel("Time (s)")
+    ax.set_ylabel("Mel frequency (mel)")
+    _annotate_axes_with_class(ax, class_label)
     plt.tight_layout()
     plt.savefig(out_path, dpi=150)
     plt.close()
 
-def plot_spectrum(S_mag: np.ndarray, sr: int, out_path: str, title: str = "Median magnitude spectrum"):
-    """Plot median-over-time spectrum; return (spec, freqs, centroid_hz, peak_hz)."""
+def plot_spectrum(S_mag: np.ndarray, sr: int, out_path: str, title: str = "Median magnitude spectrum",
+                  class_label: Optional[str] = None):
     spec = np.median(S_mag, axis=1)
     n_fft_est = (S_mag.shape[0] - 1) * 2
     freqs = librosa.fft_frequencies(sr=sr, n_fft=n_fft_est)
     plt.figure(figsize=(7,3))
-    plt.plot(freqs, spec)
-    plt.xlabel("Frequency (Hz)")
-    plt.ylabel("Magnitude (a.u.)")
-    plt.title(title)
+    ax = plt.gca()
+    ax.plot(freqs, spec)
+    ax.set_xlabel("Frequency (Hz)")
+    ax.set_ylabel("Magnitude (a.u.)")
+    ax.set_title(title)
+    _annotate_axes_with_class(ax, class_label)
     plt.tight_layout()
     plt.savefig(out_path, dpi=150)
     plt.close()
@@ -253,27 +274,33 @@ def pca_filtered_mean_spectrum(clip_list: List[str], fs: "FrameSource",
 # ---------- Overlay helpers ----------
 def plot_overlay_spectra(freqs: np.ndarray, spec_a: np.ndarray, spec_b: np.ndarray,
                          labels: Tuple[str, str], out_path: str,
-                         title: str = "Mean-of-spectra vs spectrum-of-mean"):
+                         title: str = "Mean-of-spectra vs spectrum-of-mean",
+                         class_label: Optional[str] = None):
     plt.figure(figsize=(7,3))
-    plt.plot(freqs, spec_a, label=labels[0])
-    plt.plot(freqs, spec_b, label=labels[1])
-    plt.xlabel("Frequency (Hz)")
-    plt.ylabel("Magnitude (a.u.)")
-    plt.title(title)
-    plt.legend()
+    ax = plt.gca()
+    ax.plot(freqs, spec_a, label=labels[0])
+    ax.plot(freqs, spec_b, label=labels[1])
+    ax.set_xlabel("Frequency (Hz)")
+    ax.set_ylabel("Magnitude (a.u.)")
+    ax.set_title(title)
+    ax.legend()
+    _annotate_axes_with_class(ax, class_label)
     plt.tight_layout()
     plt.savefig(out_path, dpi=150)
     plt.close()
 
 def plot_inversion_bundle_overlay(freqs: np.ndarray, curves: Dict[str, np.ndarray],
-                                  out_path: str, title: str):
+                                  out_path: str, title: str,
+                                  class_label: Optional[str] = None):
     plt.figure(figsize=(8,4))
+    ax = plt.gca()
     for name, spec in curves.items():
-        plt.plot(freqs, spec, label=name)
-    plt.xlabel("Frequency (Hz)")
-    plt.ylabel("Magnitude (a.u.)")
-    plt.title(title)
-    plt.legend()
+        ax.plot(freqs, spec, label=name)
+    ax.set_xlabel("Frequency (Hz)")
+    ax.set_ylabel("Magnitude (a.u.)")
+    ax.set_title(title)
+    ax.legend()
+    _annotate_axes_with_class(ax, class_label)
     plt.tight_layout()
     plt.savefig(out_path, dpi=150)
     plt.close()
@@ -332,10 +359,10 @@ def process_class(class_name: str,
                                                     n_mels=n_mels, n_fft=n_fft,
                                                     hop_length=hop_length, gl_iters=gl_iters)
     fmax = (sr * 0.5) * fmax_frac_of_nyq
-    plot_mel(mel_mean, sr, hop_length, os.path.join(out_dir, "mean_mel.png"), fmin=fmin, fmax=fmax)
+    plot_mel(mel_mean, sr, hop_length, os.path.join(out_dir, "mean_mel.png"), fmin=fmin, fmax=fmax, class_label=class_name)
     spec_inv, freqs, centroid_hz, peak_hz = plot_spectrum(
         S_mean, sr, os.path.join(out_dir, "mean_spectrum_hz.png"),
-        title="Model inversion: median spectrum of mean-MFCC audio"
+        title="Model inversion: median spectrum of mean-MFCC audio", class_label=class_name
     )
     sf.write(os.path.join(out_dir, "mean_envelope.wav"), y_mean, sr)
 
@@ -345,7 +372,8 @@ def process_class(class_name: str,
     spec_emp = S_emp[:, 0]
     save_spectrum_plot(freqs, spec_emp,
                        os.path.join(out_dir, "data_mean_spectrum_hz.png"),
-                       title="Data average: mean spectrum per class (mel-power mean → STFT)")
+                       title="Data average: mean spectrum per class (mel-power mean → STFT)",
+                       class_label=class_name)
 
     # ---------- PCA-FILTERED MEAN ----------
     spec_pca = pca_filtered_mean_spectrum(
@@ -354,13 +382,15 @@ def process_class(class_name: str,
     )
     save_spectrum_plot(freqs, spec_pca,
                        os.path.join(out_dir, "pca_filtered_mean_spectrum_hz.png"),
-                       title="PCA-filtered mean: project→invert→average (uses r PCs)")
+                       title="PCA-filtered mean: project→invert→average (uses r PCs)",
+                       class_label=class_name)
 
     # ---------- OVERLAYS (per-class) ----------
     plot_overlay_spectra(freqs, spec_emp, spec_inv,
                          labels=("Data mean of spectra", "Model spectrum of mean MFCC"),
                          out_path=os.path.join(out_dir, "compare_mean_vs_inversion.png"),
-                         title="Mean-of-spectra vs Spectrum-of-mean")
+                         title="Mean-of-spectra vs Spectrum-of-mean",
+                         class_label=class_name)
 
     curves = {
         "data_mean": spec_emp.astype(float),
@@ -389,9 +419,9 @@ def process_class(class_name: str,
                                                    hop_length=hop_length, gl_iters=gl_iters)
             base = f"pc{j+1}_{tag}"
             plot_mel(mel_j, sr, hop_length, os.path.join(out_dir, f"{base}_mel.png"),
-                     fmin=fmin, fmax=fmax)
+                     fmin=fmin, fmax=fmax, class_label=class_name)
             plot_spectrum(S_j, sr, os.path.join(out_dir, f"{base}_spectrum_hz.png"),
-                          title=f"Model inversion: median spectrum (PC{j+1} {tag})")
+                          title=f"Model inversion: median spectrum (PC{j+1} {tag})", class_label=class_name)
             sf.write(os.path.join(out_dir, f"{base}.wav"), y_j, sr)
 
     # ---- Build PC1 sweep CSV for Manim slider (alphas: -2,-1,0,1,2) ----

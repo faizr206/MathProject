@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.8.31)  3 NOV 2025 08:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.8.31)  8 NOV 2025 11:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -597,41 +597,36 @@ Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
 
-Overfull \hbox (51.58644pt too wide) in paragraph at lines 81--82
-\T1/lmr/m/it/10.95 (-20) Code ref-er-ences: \T1/lmtt/m/n/10.95 prepare_data.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 make_mfcc_frames.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 cv_subspace_pipeline.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 nsc_calibrated.py\T1/lmr/m/n/10.95 (-20) . 
- []
-
-
-Overfull \hbox (19.69516pt too wide) in paragraph at lines 104--105
+Overfull \hbox (19.69516pt too wide) in paragraph at lines 106--107
 \T1/lmr/m/it/10.95 (-20) Artifacts: $\T1/lmtt/m/n/10.95 . . /Results / cv / engine _ configuration / fold _ * / coverage . json$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv / engine _
  []
 
 
-Overfull \hbox (14.77194pt too wide) in paragraph at lines 104--105
+Overfull \hbox (14.77194pt too wide) in paragraph at lines 106--107
 \T1/lmtt/m/n/10.95 configuration / summary / table _ A _ lowdim . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / summary / frames _ per _ clip _ by _ class .
  []
 
-<../Results/scree_mfcc_vs_fft.png, id=70, 578.16pt x 361.35pt>
-File: ../Results/scree_mfcc_vs_fft.png Graphic file (type png)
-<use ../Results/scree_mfcc_vs_fft.png>
-Package pdftex.def Info: ../Results/scree_mfcc_vs_fft.png  used on input line 126.
-(pdftex.def)             Requested size: 469.75502pt x 293.59616pt.
 
 
 [2]
-
-[3 <../Results/scree_mfcc_vs_fft.png>]
-<../figures/mfcc_example.png, id=85, 722.7pt x 289.08pt>
+<../Results/scree_mfcc_vs_fft.png, id=76, 578.16pt x 361.35pt>
+File: ../Results/scree_mfcc_vs_fft.png Graphic file (type png)
+<use ../Results/scree_mfcc_vs_fft.png>
+Package pdftex.def Info: ../Results/scree_mfcc_vs_fft.png  used on input line 128.
+(pdftex.def)             Requested size: 469.75502pt x 293.59616pt.
+<../figures/mfcc_example.png, id=78, 722.7pt x 289.08pt>
 File: ../figures/mfcc_example.png Graphic file (type png)
 <use ../figures/mfcc_example.png>
-Package pdftex.def Info: ../figures/mfcc_example.png  used on input line 137.
+Package pdftex.def Info: ../figures/mfcc_example.png  used on input line 139.
 (pdftex.def)             Requested size: 375.80544pt x 150.32245pt.
 
-Underfull \hbox (badness 2961) in paragraph at lines 140--140
+Underfull \hbox (badness 2961) in paragraph at lines 142--142
 []\T1/lmr/m/n/10.95 (+20) Figure 2: |Ex-am-ple fea-tures from a 10s en-gine clip (22.05kHz, \T1/lmtt/m/n/10.95 frame_length=2048\T1/lmr/m/n/10.95 (+20) ,
  []
 
 
+
+[3 <../Results/scree_mfcc_vs_fft.png>]
 
 [4{/usr/local/texlive/2025basic/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc} <../figures/mfcc_example.png>]
 
@@ -641,27 +636,27 @@ Underfull \hbox (badness 2961) in paragraph at lines 140--140
 <../Results/cv/engine_configuration/summary/figures/rep_scree_V6.png, id=131, 433.62pt x 289.08pt>
 File: ../Results/cv/engine_configuration/summary/figures/rep_scree_V6.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/rep_scree_V6.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_scree_V6.png  used on input line 268.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_scree_V6.png  used on input line 271.
 (pdftex.def)             Requested size: 89.2546pt x 59.49997pt.
 <../Results/cv/engine_configuration/summary/figures/rep_scree_V8.png, id=132, 433.62pt x 289.08pt>
 File: ../Results/cv/engine_configuration/summary/figures/rep_scree_V8.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/rep_scree_V8.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_scree_V8.png  used on input line 272.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_scree_V8.png  used on input line 275.
 (pdftex.def)             Requested size: 89.2546pt x 59.49997pt.
 <../Results/cv/engine_configuration/summary/figures/rep_scree_inline-4.png, id=133, 433.62pt x 289.08pt>
 File: ../Results/cv/engine_configuration/summary/figures/rep_scree_inline-4.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/rep_scree_inline-4.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_scree_inline-4.png  used on input line 276.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_scree_inline-4.png  used on input line 279.
 (pdftex.def)             Requested size: 89.2546pt x 59.49997pt.
 <../Results/cv/engine_configuration/summary/figures/rep_scree_inline-6.png, id=134, 433.62pt x 289.08pt>
 File: ../Results/cv/engine_configuration/summary/figures/rep_scree_inline-6.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/rep_scree_inline-6.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_scree_inline-6.png  used on input line 280.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_scree_inline-6.png  used on input line 283.
 (pdftex.def)             Requested size: 89.2546pt x 59.49997pt.
 <../Results/cv/engine_configuration/summary/figures/rep_scree_single-cylinder.png, id=135, 433.62pt x 289.08pt>
 File: ../Results/cv/engine_configuration/summary/figures/rep_scree_single-cylinder.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/rep_scree_single-cylinder.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_scree_single-cylinder.png  used on input line 284.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_scree_single-cylinder.png  used on input line 287.
 (pdftex.def)             Requested size: 89.2546pt x 59.49997pt.
 
 
@@ -669,22 +664,22 @@ Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_
 <../Results/inversion/engine_configuration/cross_class_overlay_pca_filtered_mean.png, id=151, 650.43pt x 289.08pt>
 File: ../Results/inversion/engine_configuration/cross_class_overlay_pca_filtered_mean.png Graphic file (type png)
 <use ../Results/inversion/engine_configuration/cross_class_overlay_pca_filtered_mean.png>
-Package pdftex.def Info: ../Results/inversion/engine_configuration/cross_class_overlay_pca_filtered_mean.png  used on input line 323.
+Package pdftex.def Info: ../Results/inversion/engine_configuration/cross_class_overlay_pca_filtered_mean.png  used on input line 326.
 (pdftex.def)             Requested size: 469.75502pt x 208.78584pt.
 <../Results/inversion/engine_configuration/V8/compare_inversion_bundle.png, id=152, 578.16pt x 289.08pt>
 File: ../Results/inversion/engine_configuration/V8/compare_inversion_bundle.png Graphic file (type png)
 <use ../Results/inversion/engine_configuration/V8/compare_inversion_bundle.png>
-Package pdftex.def Info: ../Results/inversion/engine_configuration/V8/compare_inversion_bundle.png  used on input line 331.
+Package pdftex.def Info: ../Results/inversion/engine_configuration/V8/compare_inversion_bundle.png  used on input line 334.
 (pdftex.def)             Requested size: 469.75502pt x 234.8769pt.
 <../Results/inversion/engine_configuration/inline-4/pc1_minus_spectrum_hz.png, id=153, 505.89pt x 216.81pt>
 File: ../Results/inversion/engine_configuration/inline-4/pc1_minus_spectrum_hz.png Graphic file (type png)
 <use ../Results/inversion/engine_configuration/inline-4/pc1_minus_spectrum_hz.png>
-Package pdftex.def Info: ../Results/inversion/engine_configuration/inline-4/pc1_minus_spectrum_hz.png  used on input line 341.
+Package pdftex.def Info: ../Results/inversion/engine_configuration/inline-4/pc1_minus_spectrum_hz.png  used on input line 344.
 (pdftex.def)             Requested size: 225.4804pt x 96.63397pt.
 <../Results/inversion/engine_configuration/inline-4/pc1_plus_spectrum_hz.png, id=154, 505.89pt x 216.81pt>
 File: ../Results/inversion/engine_configuration/inline-4/pc1_plus_spectrum_hz.png Graphic file (type png)
 <use ../Results/inversion/engine_configuration/inline-4/pc1_plus_spectrum_hz.png>
-Package pdftex.def Info: ../Results/inversion/engine_configuration/inline-4/pc1_plus_spectrum_hz.png  used on input line 346.
+Package pdftex.def Info: ../Results/inversion/engine_configuration/inline-4/pc1_plus_spectrum_hz.png  used on input line 349.
 (pdftex.def)             Requested size: 225.4804pt x 96.63397pt.
 
 
@@ -694,7 +689,7 @@ Package pdftex.def Info: ../Results/inversion/engine_configuration/inline-4/pc1_
 <../Results/cv/engine_configuration/summary/figures/stability_violin.png, id=167, 433.62pt x 361.35pt>
 File: ../Results/cv/engine_configuration/summary/figures/stability_violin.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/stability_violin.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/stability_violin.png  used on input line 395.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/stability_violin.png  used on input line 398.
 (pdftex.def)             Requested size: 375.80544pt x 313.18651pt.
 
 
@@ -704,17 +699,17 @@ Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/stab
 <../Results/cv/engine_configuration/summary/figures/rep_angles_heatmap.png, id=184, 433.62pt x 361.35pt>
 File: ../Results/cv/engine_configuration/summary/figures/rep_angles_heatmap.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/rep_angles_heatmap.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_angles_heatmap.png  used on input line 406.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_angles_heatmap.png  used on input line 409.
 (pdftex.def)             Requested size: 375.80544pt x 313.18651pt.
 <../Results/cv/engine_configuration/summary/figures/rep_confusion_norm.png, id=185, 433.62pt x 361.35pt>
 File: ../Results/cv/engine_configuration/summary/figures/rep_confusion_norm.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/rep_confusion_norm.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_confusion_norm.png  used on input line 437.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_confusion_norm.png  used on input line 440.
 (pdftex.def)             Requested size: 225.4804pt x 187.90308pt.
 <../Results/cv/engine_configuration/summary/figures/rep_confusion_raw.png, id=186, 433.62pt x 361.35pt>
 File: ../Results/cv/engine_configuration/summary/figures/rep_confusion_raw.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/rep_confusion_raw.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_confusion_raw.png  used on input line 441.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_confusion_raw.png  used on input line 444.
 (pdftex.def)             Requested size: 225.4804pt x 187.90308pt.
 
 
@@ -723,33 +718,98 @@ Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_
 [13 <../Results/cv/engine_configuration/summary/figures/rep_confusion_norm.png> <../Results/cv/engine_configuration/summary/figures/rep_confusion_raw.png>]
 
 [14]
-Overfull \hbox (6.0892pt too wide) in paragraph at lines 494--499
+Overfull \hbox (6.0892pt too wide) in paragraph at lines 497--502
  []\T1/lmr/bx/n/10.95 (-20) Reproducibility.[] \T1/lmr/m/n/10.95 (-20) All ex-per-i-ments use MFCC-20+$\OT1/lmr/m/n/10.95 (-20) ^^A$\T1/lmr/m/n/10.95 (-20) +$\OT1/lmr/m/n/10.95 (-20) ^^A^^A$ \T1/lmr/m/n/10.95 (-20) ($\OML/lmm/m/it/10.95 D \OT1/lmr/m/n/10.95 (-20) = 60$\T1/lmr/m/n/10.95 (-20) ) at [][], frames $\OT1/lmr/m/n/10.95 (-20) (2048\OML/lmm/m/it/10.95 ; \OT1/lmr/m/n/10.95 (-20) 512)$\T1/lmr/m/n/10.95 (-20) .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 562--571
-
+Overfull \hbox (42.4923pt too wide) in paragraph at lines 594--603
+\T1/lmtt/m/n/10.95 make_mfcc_frames.py\T1/lmr/m/n/10.95 (-20) : com-pute MFCC-20+$\OT1/lmr/m/n/10.95 (-20) ^^A$\T1/lmr/m/n/10.95 (-20) +$\OT1/lmr/m/n/10.95 (-20) ^^A^^A$ \T1/lmr/m/n/10.95 (-20) ($\OML/lmm/m/it/10.95 D \OT1/lmr/m/n/10.95 (-20) = 60$\T1/lmr/m/n/10.95 (-20) ); write \T1/lmtt/m/n/10.95 Data/mfcc/ \T1/lmr/m/n/10.95 (-20) and \T1/lmtt/m/n/10.95 mfcc_index.parquet\T1/lmr/m/n/10.95 (-20) . 
  []
 
 
-Overfull \hbox (1.08763pt too wide) in paragraph at lines 573--577
-\T1/lmr/m/n/10.95 (-20) See $\T1/lmtt/m/n/10.95 . . /Results / cv / engine _ configuration / fold _ * / reconstruction _ mse . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv /
+Overfull \hbox (24.17198pt too wide) in paragraph at lines 594--603
+\T1/lmtt/m/n/10.95 invert_subspace_to_audio.py\T1/lmr/m/n/10.95 (-20) : per-class PCA fil-ter-ing and MFCC in-ver-sion; saves au-dio, mel/spectrum
  []
 
 
-Overfull \hbox (17.64632pt too wide) in paragraph at lines 573--577
-\T1/lmtt/m/n/10.95 engine _ configuration / fold _ * / stability _ summary . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv / engine _ configuration /
+Overfull \hbox (54.5647pt too wide) in paragraph at lines 594--603
+\T1/lmtt/m/n/10.95 compute_median_frames_per_class.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 compare_variance_mfcc_vs_fft.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 plot_mfcc.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 plot_fft.py\T1/lmr/m/n/10.95 (-20) :
  []
 
 
-Overfull \hbox (26.26941pt too wide) in paragraph at lines 573--577
-\T1/lmtt/m/n/10.95 fold _ * / between _ class _ angles . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv / engine _ configuration / fold _ * / nsc _ accuracy .
+Overfull \hbox (43.36388pt too wide) in paragraph at lines 594--603
+\T1/lmtt/m/n/10.95 Video/ \T1/lmr/m/n/10.95 (-20) (\T1/lmtt/m/n/10.95 inversion2.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 inversion.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 pca.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 nsc.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 stability.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 subspace_geom.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 fft_mfcc.py\T1/lmr/m/n/10.95 (-20) ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 594--603
+
  []
 
 
 
 [15]
+Overfull \hbox (1.08763pt too wide) in paragraph at lines 606--616
+\T1/lmr/m/n/10.95 (-20) See $\T1/lmtt/m/n/10.95 . . /Results / cv / engine \ _configuration / fold \ _* / reconstruction \ _mse . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results /
+ []
+
+
+Overfull \hbox (57.88745pt too wide) in paragraph at lines 606--616
+\T1/lmtt/m/n/10.95 cv / engine \ _configuration / fold \ _* / stability \ _summary . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv / engine \ _configuration /
+ []
+
+
+Overfull \hbox (23.39505pt too wide) in paragraph at lines 606--616
+\T1/lmtt/m/n/10.95 fold \ _* / stability \ _raw . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv / engine \ _configuration / fold \ _* / between \ _class \
+ []
+
+
+Overfull \hbox (22.72891pt too wide) in paragraph at lines 606--616
+\T1/lmtt/m/n/10.95 _angles . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv / engine \ _configuration / fold \ _* / nsc \ _accuracy . json$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results /
+ []
+
+
+Overfull \hbox (57.88745pt too wide) in paragraph at lines 606--616
+\T1/lmtt/m/n/10.95 cv / engine \ _configuration / fold \ _* / per \ _class \ _report . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv / engine \ _configuration /
+ []
+
+
+Overfull \hbox (3.00862pt too wide) in paragraph at lines 606--616
+\T1/lmtt/m/n/10.95 fold \ _* / clip \ _scores . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv / engine \ _configuration / fold \ _* / coverage . json$\T1/lmr/m/n/10.95 (-20) ,
+ []
+
+
+Overfull \hbox (1.08763pt too wide) in paragraph at lines 630--636
+\T1/lmr/m/n/10.95 (-20) See $\T1/lmtt/m/n/10.95 . . /Results / cv / engine \ _configuration / summary / table \ _A \ _lowdim . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv /
+ []
+
+
+Overfull \hbox (11.89758pt too wide) in paragraph at lines 630--636
+\T1/lmtt/m/n/10.95 engine \ _configuration / summary / table \ _B \ _nsc . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv / engine \ _configuration /
+ []
+
+
+Overfull \hbox (32.91785pt too wide) in paragraph at lines 630--636
+\T1/lmtt/m/n/10.95 summary / table \ _C \ _stability . csv$\T1/lmr/m/n/10.95 (-20) , and per-mu-ta-tion re-sults $\T1/lmtt/m/n/10.95 . . /Results / cv / engine \ _configuration /
+ []
+
+
+Overfull \hbox (32.01814pt too wide) in paragraph at lines 630--636
+\T1/lmtt/m/n/10.95 summary / perm \ _test . json$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv / engine \ _configuration / summary / perm \ _across \ _folds .
+ []
+
+
+Overfull \hbox (114.83287pt too wide) in paragraph at lines 639--647
+\T1/lmr/m/n/10.95 (-20) Per-class bun-dles un-der $\T1/lmtt/m/n/10.95 . . /Results / inversion / engine \ _configuration / <[]class >[] /$ \T1/lmr/m/n/10.95 (-20) (e.g., \T1/lmtt/m/n/10.95 pc1_{plus,minus}.wav/.json\T1/lmr/m/n/10.95 (-20) ,
+ []
+
+
+Overfull \hbox (224.05937pt too wide) in paragraph at lines 639--647
+\T1/lmr/m/n/10.95 (-20) class over-lays and con-figs at $\T1/lmtt/m/n/10.95 . . /Results / inversion / engine \ _configuration/$\T1/lmr/m/n/10.95 (-20) , in-clud-ing \T1/lmtt/m/n/10.95 cross_class_overlay_pca_filtered_mean.csv/.png\T1/lmr/m/n/10.95 (-20) ,
+ []
+
+
 
 [16] (./main.aux)
  ***********
@@ -757,21 +817,21 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 0AB83F04C7C5720363C5C47D2B8FA8D7;2068.
+(rerunfilecheck)             Checksum: BEA43E30E53C40E5793E01FE170B6C49;1862.
  ) 
 Here is how much of TeX's memory you used:
- 17777 strings out of 474662
- 336806 string characters out of 5751109
- 726398 words of memory out of 5000000
+ 17779 strings out of 474662
+ 336828 string characters out of 5751109
+ 726419 words of memory out of 5000000
  40258 multiletter control sequences out of 15000+600000
  650675 words of font info for 226 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 75i,9n,79p,1212b,1045s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,9n,79p,1305b,1060s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (16 pages, 3048404 bytes).
+Output written on main.pdf (16 pages, 3054239 bytes).
 PDF statistics:
- 331 PDF objects out of 1000 (max. 8388607)
- 240 compressed objects within 3 object streams
- 76 named destinations out of 1000 (max. 500000)
+ 333 PDF objects out of 1000 (max. 8388607)
+ 242 compressed objects within 3 object streams
+ 78 named destinations out of 1000 (max. 500000)
  55468 words of extra memory for PDF output out of 61914 (max. 10000000)
 

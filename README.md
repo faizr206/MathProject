@@ -1,4 +1,4 @@
-# Low‑Dimensional, Stable, and Moderately Discriminative Subspaces for Engine Sound Attributes
+# Vroom2Vec: Learning Low-Dimensional Representations of Engine Sounds
 
 This repository investigates whether engine sounds sharing a fixed attribute (here: `engine_configuration`) live in low‑dimensional, stable, and moderately discriminative linear subspaces.
 
