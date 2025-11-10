@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.8.31)  8 NOV 2025 11:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.8.31)  10 NOV 2025 21:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -664,22 +664,22 @@ Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_
 <../Results/inversion/engine_configuration/cross_class_overlay_pca_filtered_mean.png, id=151, 650.43pt x 289.08pt>
 File: ../Results/inversion/engine_configuration/cross_class_overlay_pca_filtered_mean.png Graphic file (type png)
 <use ../Results/inversion/engine_configuration/cross_class_overlay_pca_filtered_mean.png>
-Package pdftex.def Info: ../Results/inversion/engine_configuration/cross_class_overlay_pca_filtered_mean.png  used on input line 326.
+Package pdftex.def Info: ../Results/inversion/engine_configuration/cross_class_overlay_pca_filtered_mean.png  used on input line 314.
 (pdftex.def)             Requested size: 469.75502pt x 208.78584pt.
 <../Results/inversion/engine_configuration/V8/compare_inversion_bundle.png, id=152, 578.16pt x 289.08pt>
 File: ../Results/inversion/engine_configuration/V8/compare_inversion_bundle.png Graphic file (type png)
 <use ../Results/inversion/engine_configuration/V8/compare_inversion_bundle.png>
-Package pdftex.def Info: ../Results/inversion/engine_configuration/V8/compare_inversion_bundle.png  used on input line 334.
+Package pdftex.def Info: ../Results/inversion/engine_configuration/V8/compare_inversion_bundle.png  used on input line 322.
 (pdftex.def)             Requested size: 469.75502pt x 234.8769pt.
 <../Results/inversion/engine_configuration/inline-4/pc1_minus_spectrum_hz.png, id=153, 505.89pt x 216.81pt>
 File: ../Results/inversion/engine_configuration/inline-4/pc1_minus_spectrum_hz.png Graphic file (type png)
 <use ../Results/inversion/engine_configuration/inline-4/pc1_minus_spectrum_hz.png>
-Package pdftex.def Info: ../Results/inversion/engine_configuration/inline-4/pc1_minus_spectrum_hz.png  used on input line 344.
+Package pdftex.def Info: ../Results/inversion/engine_configuration/inline-4/pc1_minus_spectrum_hz.png  used on input line 332.
 (pdftex.def)             Requested size: 225.4804pt x 96.63397pt.
 <../Results/inversion/engine_configuration/inline-4/pc1_plus_spectrum_hz.png, id=154, 505.89pt x 216.81pt>
 File: ../Results/inversion/engine_configuration/inline-4/pc1_plus_spectrum_hz.png Graphic file (type png)
 <use ../Results/inversion/engine_configuration/inline-4/pc1_plus_spectrum_hz.png>
-Package pdftex.def Info: ../Results/inversion/engine_configuration/inline-4/pc1_plus_spectrum_hz.png  used on input line 349.
+Package pdftex.def Info: ../Results/inversion/engine_configuration/inline-4/pc1_plus_spectrum_hz.png  used on input line 337.
 (pdftex.def)             Requested size: 225.4804pt x 96.63397pt.
 
 
@@ -689,7 +689,7 @@ Package pdftex.def Info: ../Results/inversion/engine_configuration/inline-4/pc1_
 <../Results/cv/engine_configuration/summary/figures/stability_violin.png, id=167, 433.62pt x 361.35pt>
 File: ../Results/cv/engine_configuration/summary/figures/stability_violin.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/stability_violin.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/stability_violin.png  used on input line 398.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/stability_violin.png  used on input line 368.
 (pdftex.def)             Requested size: 375.80544pt x 313.18651pt.
 
 
@@ -699,17 +699,17 @@ Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/stab
 <../Results/cv/engine_configuration/summary/figures/rep_angles_heatmap.png, id=184, 433.62pt x 361.35pt>
 File: ../Results/cv/engine_configuration/summary/figures/rep_angles_heatmap.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/rep_angles_heatmap.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_angles_heatmap.png  used on input line 409.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_angles_heatmap.png  used on input line 379.
 (pdftex.def)             Requested size: 375.80544pt x 313.18651pt.
 <../Results/cv/engine_configuration/summary/figures/rep_confusion_norm.png, id=185, 433.62pt x 361.35pt>
 File: ../Results/cv/engine_configuration/summary/figures/rep_confusion_norm.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/rep_confusion_norm.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_confusion_norm.png  used on input line 440.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_confusion_norm.png  used on input line 410.
 (pdftex.def)             Requested size: 225.4804pt x 187.90308pt.
 <../Results/cv/engine_configuration/summary/figures/rep_confusion_raw.png, id=186, 433.62pt x 361.35pt>
 File: ../Results/cv/engine_configuration/summary/figures/rep_confusion_raw.png Graphic file (type png)
 <use ../Results/cv/engine_configuration/summary/figures/rep_confusion_raw.png>
-Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_confusion_raw.png  used on input line 444.
+Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_confusion_raw.png  used on input line 414.
 (pdftex.def)             Requested size: 225.4804pt x 187.90308pt.
 
 
@@ -718,94 +718,94 @@ Package pdftex.def Info: ../Results/cv/engine_configuration/summary/figures/rep_
 [13 <../Results/cv/engine_configuration/summary/figures/rep_confusion_norm.png> <../Results/cv/engine_configuration/summary/figures/rep_confusion_raw.png>]
 
 [14]
-Overfull \hbox (6.0892pt too wide) in paragraph at lines 497--502
+Overfull \hbox (6.0892pt too wide) in paragraph at lines 468--473
  []\T1/lmr/bx/n/10.95 (-20) Reproducibility.[] \T1/lmr/m/n/10.95 (-20) All ex-per-i-ments use MFCC-20+$\OT1/lmr/m/n/10.95 (-20) ^^A$\T1/lmr/m/n/10.95 (-20) +$\OT1/lmr/m/n/10.95 (-20) ^^A^^A$ \T1/lmr/m/n/10.95 (-20) ($\OML/lmm/m/it/10.95 D \OT1/lmr/m/n/10.95 (-20) = 60$\T1/lmr/m/n/10.95 (-20) ) at [][], frames $\OT1/lmr/m/n/10.95 (-20) (2048\OML/lmm/m/it/10.95 ; \OT1/lmr/m/n/10.95 (-20) 512)$\T1/lmr/m/n/10.95 (-20) .
  []
 
 
-Overfull \hbox (42.4923pt too wide) in paragraph at lines 594--603
+Overfull \hbox (42.4923pt too wide) in paragraph at lines 492--501
 \T1/lmtt/m/n/10.95 make_mfcc_frames.py\T1/lmr/m/n/10.95 (-20) : com-pute MFCC-20+$\OT1/lmr/m/n/10.95 (-20) ^^A$\T1/lmr/m/n/10.95 (-20) +$\OT1/lmr/m/n/10.95 (-20) ^^A^^A$ \T1/lmr/m/n/10.95 (-20) ($\OML/lmm/m/it/10.95 D \OT1/lmr/m/n/10.95 (-20) = 60$\T1/lmr/m/n/10.95 (-20) ); write \T1/lmtt/m/n/10.95 Data/mfcc/ \T1/lmr/m/n/10.95 (-20) and \T1/lmtt/m/n/10.95 mfcc_index.parquet\T1/lmr/m/n/10.95 (-20) . 
  []
 
 
-Overfull \hbox (24.17198pt too wide) in paragraph at lines 594--603
+Overfull \hbox (24.17198pt too wide) in paragraph at lines 492--501
 \T1/lmtt/m/n/10.95 invert_subspace_to_audio.py\T1/lmr/m/n/10.95 (-20) : per-class PCA fil-ter-ing and MFCC in-ver-sion; saves au-dio, mel/spectrum
  []
 
 
-Overfull \hbox (54.5647pt too wide) in paragraph at lines 594--603
+Overfull \hbox (54.5647pt too wide) in paragraph at lines 492--501
 \T1/lmtt/m/n/10.95 compute_median_frames_per_class.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 compare_variance_mfcc_vs_fft.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 plot_mfcc.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 plot_fft.py\T1/lmr/m/n/10.95 (-20) :
  []
 
 
-Overfull \hbox (43.36388pt too wide) in paragraph at lines 594--603
+Overfull \hbox (43.36388pt too wide) in paragraph at lines 492--501
 \T1/lmtt/m/n/10.95 Video/ \T1/lmr/m/n/10.95 (-20) (\T1/lmtt/m/n/10.95 inversion2.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 inversion.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 pca.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 nsc.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 stability.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 subspace_geom.py\T1/lmr/m/n/10.95 (-20) , \T1/lmtt/m/n/10.95 fft_mfcc.py\T1/lmr/m/n/10.95 (-20) ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 594--603
+Underfull \hbox (badness 10000) in paragraph at lines 492--501
 
  []
 
 
 
 [15]
-Overfull \hbox (1.08763pt too wide) in paragraph at lines 606--616
+Overfull \hbox (1.08763pt too wide) in paragraph at lines 504--514
 \T1/lmr/m/n/10.95 (-20) See $\T1/lmtt/m/n/10.95 . . /Results / cv / engine \ _configuration / fold \ _* / reconstruction \ _mse . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results /
  []
 
 
-Overfull \hbox (57.88745pt too wide) in paragraph at lines 606--616
+Overfull \hbox (57.88745pt too wide) in paragraph at lines 504--514
 \T1/lmtt/m/n/10.95 cv / engine \ _configuration / fold \ _* / stability \ _summary . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv / engine \ _configuration /
  []
 
 
-Overfull \hbox (23.39505pt too wide) in paragraph at lines 606--616
+Overfull \hbox (23.39505pt too wide) in paragraph at lines 504--514
 \T1/lmtt/m/n/10.95 fold \ _* / stability \ _raw . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv / engine \ _configuration / fold \ _* / between \ _class \
  []
 
 
-Overfull \hbox (22.72891pt too wide) in paragraph at lines 606--616
+Overfull \hbox (22.72891pt too wide) in paragraph at lines 504--514
 \T1/lmtt/m/n/10.95 _angles . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv / engine \ _configuration / fold \ _* / nsc \ _accuracy . json$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results /
  []
 
 
-Overfull \hbox (57.88745pt too wide) in paragraph at lines 606--616
+Overfull \hbox (57.88745pt too wide) in paragraph at lines 504--514
 \T1/lmtt/m/n/10.95 cv / engine \ _configuration / fold \ _* / per \ _class \ _report . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv / engine \ _configuration /
  []
 
 
-Overfull \hbox (3.00862pt too wide) in paragraph at lines 606--616
+Overfull \hbox (3.00862pt too wide) in paragraph at lines 504--514
 \T1/lmtt/m/n/10.95 fold \ _* / clip \ _scores . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv / engine \ _configuration / fold \ _* / coverage . json$\T1/lmr/m/n/10.95 (-20) ,
  []
 
 
-Overfull \hbox (1.08763pt too wide) in paragraph at lines 630--636
+Overfull \hbox (1.08763pt too wide) in paragraph at lines 528--534
 \T1/lmr/m/n/10.95 (-20) See $\T1/lmtt/m/n/10.95 . . /Results / cv / engine \ _configuration / summary / table \ _A \ _lowdim . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv /
  []
 
 
-Overfull \hbox (11.89758pt too wide) in paragraph at lines 630--636
+Overfull \hbox (11.89758pt too wide) in paragraph at lines 528--534
 \T1/lmtt/m/n/10.95 engine \ _configuration / summary / table \ _B \ _nsc . csv$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv / engine \ _configuration /
  []
 
 
-Overfull \hbox (32.91785pt too wide) in paragraph at lines 630--636
+Overfull \hbox (32.91785pt too wide) in paragraph at lines 528--534
 \T1/lmtt/m/n/10.95 summary / table \ _C \ _stability . csv$\T1/lmr/m/n/10.95 (-20) , and per-mu-ta-tion re-sults $\T1/lmtt/m/n/10.95 . . /Results / cv / engine \ _configuration /
  []
 
 
-Overfull \hbox (32.01814pt too wide) in paragraph at lines 630--636
+Overfull \hbox (32.01814pt too wide) in paragraph at lines 528--534
 \T1/lmtt/m/n/10.95 summary / perm \ _test . json$\T1/lmr/m/n/10.95 (-20) , $\T1/lmtt/m/n/10.95 . . /Results / cv / engine \ _configuration / summary / perm \ _across \ _folds .
  []
 
 
-Overfull \hbox (114.83287pt too wide) in paragraph at lines 639--647
+Overfull \hbox (114.83287pt too wide) in paragraph at lines 537--545
 \T1/lmr/m/n/10.95 (-20) Per-class bun-dles un-der $\T1/lmtt/m/n/10.95 . . /Results / inversion / engine \ _configuration / <[]class >[] /$ \T1/lmr/m/n/10.95 (-20) (e.g., \T1/lmtt/m/n/10.95 pc1_{plus,minus}.wav/.json\T1/lmr/m/n/10.95 (-20) ,
  []
 
 
-Overfull \hbox (224.05937pt too wide) in paragraph at lines 639--647
+Overfull \hbox (224.05937pt too wide) in paragraph at lines 537--545
 \T1/lmr/m/n/10.95 (-20) class over-lays and con-figs at $\T1/lmtt/m/n/10.95 . . /Results / inversion / engine \ _configuration/$\T1/lmr/m/n/10.95 (-20) , in-clud-ing \T1/lmtt/m/n/10.95 cross_class_overlay_pca_filtered_mean.csv/.png\T1/lmr/m/n/10.95 (-20) ,
  []
 
