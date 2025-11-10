@@ -7,6 +7,10 @@ This repository investigates whether engine sounds sharing a fixed attribute (he
 - Stability: bootstrap principal angles on TRAIN (`B` bootstraps, `p=0.70` of clips)
 - Classifier: calibrated Nearest‑Subspace (NSC) with trimmed aggregation (`q=0.40`, `K≥10`)
 
+## Engine Sound Data Source
+
+https://research.google.com/audioset//dataset/engine.html
+
 
 ## Quick Start
 - Open the paper: `Paper/main.pdf` (sources in `Paper/main.tex`).
